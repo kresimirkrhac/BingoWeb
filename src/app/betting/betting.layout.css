@@ -1,0 +1,134 @@
+#main-container {
+    position: relative;
+    min-width: 300px;
+    margin: auto;    
+    display: grid;
+    grid-gap: 0.5vw;
+    grid-template-columns:  minmax(120px, 4fr) minmax(120px, 4fr);
+    grid-template-rows:  minmax(30px, 1fr) minmax(240px, 6fr) minmax(15px, 0.75fr) minmax(15px,0.75fr);
+    grid-template-areas:
+    "SI DI"
+    "BB BB"
+    "SB SB"
+    "CB CB"
+}
+#betting-buttons {
+    grid-area: BB;
+    display: grid;
+    grid-template-rows: minmax(10px,0.66fr) repeat(7,minmax(20px,1fr));
+    grid-template-columns: minmax(10px,0.66fr) repeat(7,minmax(20px,1fr));
+    grid-gap: 0.5vw;
+}
+#auto-pick {
+    grid-area: AP;
+    display: none;    
+}
+#draw-information {
+    grid-area: DI;
+    display: grid;
+    grid-template-rows: 2fr 3fr;
+    grid-template-columns: 1fr;
+}
+#stake-input {
+    grid-area: SB;
+}
+#stake-info {
+    grid-area: SI;
+    display: grid;
+    grid-template-rows: 2fr 3fr;
+}
+#command-buttons {
+    grid-area: CB;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+}
+.bet-button-inner {
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    margin: auto;
+}
+.color-button-inner, .row-button-inner {
+    display: block;
+    height: 75%;
+    width: 75%;
+    margin: auto;
+}
+.color-button-inner {border-radius: 20% / 35%;} 
+.row-button-inner {border-radius: 35% / 20%;}
+
+#stake-content-hor {
+    display: none;
+}
+#stake-content-ver {
+    display: grid;
+    grid-template-columns: minmax(105px,4.6fr) repeat(4,minmax(30px,1fr)) minmax(30px,1.5fr);
+    grid-gap: 1vw;
+}
+.bet-button-inner {
+    font-size: 110%;
+}
+.bet-button-transparent {
+    font-size: 110%;
+}
+#pick-buttons input + label,
+#stake-buttons input + label,
+#stake-content-ver input + label {
+    font-size: 100%;
+}
+@media screen and (orientation: landscape ) {
+    #main-container {
+        position: relative;
+        max-width: 800px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: minmax(240px, 10fr) minmax(90px, 3fr);
+        grid-template-rows: minmax(90px, 3fr) minmax(60px,2fr) minmax(90px, 3fr) minmax(60px,2fr) minmax(60px,1.2fr);
+        grid-template-areas:
+        "BB AP"
+        "BB DI"
+        "BB SB"
+        "BB SI"
+        "CB CB"
+    }
+    #betting-buttons {
+        grid-gap: 1vw;
+    }
+    #auto-pick {
+        grid-area: AP;
+        display: block;
+    }
+    #pick-content, #stake-content-hor {
+        display: grid;
+        grid-template-rows: 1fr 4.35fr;
+    }
+    #stake-content-ver {
+        display: none;
+    }
+    #pick-buttons, #stake-buttons {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+    }
+    .three-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 0.5vw;
+        padding: 0.3vw 0;
+    }
+    .bet-button-inner {
+        font-size: 150%;
+    }
+    .bet-button-transparent {
+        font-size: 150%;
+    }
+    #pick-buttons input + label {
+        font-size: 170%;
+        padding-top: 5%;
+        letter-spacing: -2px;
+    }
+    #stake-buttons input + label,
+    #stake-content-ver input + label {
+        font-size: 130%;
+        padding-top: 15%;
+    }
+}

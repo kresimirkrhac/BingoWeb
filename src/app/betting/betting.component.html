@@ -1,0 +1,284 @@
+<ng-template #btnChecked let-data="data">
+  <button 
+    (click)="betButtonChecked($event)"
+    class="{{ data.color }} bet-button-inner"
+    [style.height.px]="butSize"
+    [style.width.px]="butSize"
+    [style.lineHeight.px]="butSize*.9"
+    [style.marginTop.px]="butMarginTop"
+    [style.marginLeft.px]="butMarginLeft">{{ data.value }}
+  </button>
+</ng-template>
+<ng-template #btnNotChecked let-data="data">
+  <button
+    (click)="betButtonChecked($event)"
+    class="{{ data.border }} bet-button-transparent"
+    [style.height.px]="butSize"
+    [style.width.px]="butSize"
+    [style.lineHeight.px]="butSize*.9"
+    [style.marginTop.px]="butMarginTop"
+    [style.marginLeft.px]="butMarginLeft">{{ data.value }}
+  </button>
+</ng-template>
+<div id="main-container" (window:resize)="Resize()">
+  <div id="betting-buttons">
+    <div></div>
+    <div #colorButton class="color-button">
+      <button #colorButtonInner (click)="colorButtonChecked(0)" class="color-button-inner red" [style.marginTop.px]="colMarginTop"></button>
+    </div>
+    <div class="color-button">
+      <button (click)="colorButtonChecked(1)" class="color-button-inner yellow" [style.marginTop.px]="colMarginTop"></button>
+    </div>
+    <div class="color-button">
+      <button (click)="colorButtonChecked(2)" class="color-button-inner blue" [style.marginTop.px]="colMarginTop"></button>
+    </div>
+    <div class="color-button">
+      <button (click)="colorButtonChecked(3)" class="color-button-inner orange" [style.marginTop.px]="colMarginTop"></button>
+    </div>
+    <div class="color-button">
+      <button (click)="colorButtonChecked(4)" class="color-button-inner green" [style.marginTop.px]="colMarginTop"></button>
+    </div>
+    <div class="color-button">
+      <button (click)="colorButtonChecked(5)" class="color-button-inner rose" [style.marginTop.px]="colMarginTop"></button>
+    </div>
+    <div class="color-button">
+      <button (click)="colorButtonChecked(6)" class="color-button-inner purple" [style.marginTop.px]="colMarginTop"></button>
+    </div>
+    <div #rowButton class="row-button">
+      <button #rowButtonInner (click)="rowButtonChecked(0)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+    </div>
+    <div #betButton class="bet-button">
+        <ng-container [ngTemplateOutlet]='betButtons[0].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[0]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[1].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[1]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[2].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[2]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[3].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[3]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[4].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[4]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[5].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[5]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[6].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[6]}"></ng-container>
+    </div>
+    <div class="row-button">
+      <button (click)="rowButtonChecked(1)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[7].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[7]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[8].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[8]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[9].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[9]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[10].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[10]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[11].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[11]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[12].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[12]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[13].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[13]}"></ng-container>
+    </div>
+    <div class="row-button">
+      <button (click)="rowButtonChecked(2)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[14].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[14]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[15].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[15]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[16].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[16]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[17].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[17]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[18].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[18]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[19].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[19]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[20].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[20]}"></ng-container>
+    </div>
+    <div class="row-button">
+      <button (click)="rowButtonChecked(3)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[21].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[21]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[22].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[22]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[23].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[23]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[24].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[24]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[25].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[25]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[26].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[26]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[27].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[27]}"></ng-container>
+    </div>
+    <div class="row-button">
+      <button (click)="rowButtonChecked(4)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[28].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[28]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[29].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[29]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[30].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[30]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[31].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[31]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[32].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[32]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[33].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[33]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[34].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[34]}"></ng-container>
+    </div>
+    <div class="row-button">
+      <button (click)="rowButtonChecked(5)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[35].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[35]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[36].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[36]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[37].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[37]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[38].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[38]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[39].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[39]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[40].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[40]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[41].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[41]}"></ng-container>
+    </div>
+    <div class="row-button">
+      <button (click)="rowButtonChecked(6)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[42].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[42]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[43].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[43]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[44].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[44]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[45].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[45]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[46].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[46]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[47].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[47]}"></ng-container>
+    </div>
+    <div class="bet-button">
+      <ng-container [ngTemplateOutlet]='betButtons[48].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[48]}"></ng-container>
+    </div>
+  </div>
+  <div id="auto-pick">
+    <div id="pick-content">
+      <label>{{autoPickText}}</label>
+      <div id="pick-buttons">
+        <div class="three-columns">
+          <input type="radio" value="6" name="comb-button" id="btn6" [checked]="nrNumbers === 6">
+          <label for="btn6" (click)="autoPick($event)" (keydown)="pickKeyPressed($event)" role="button" tabindex="0">6</label>
+          <input type="radio" value="7" name="comb-button" id="btn7" [checked]="nrNumbers === 7">
+          <label for="btn7" (click)="autoPick($event)" (keydown)="pickKeyPressed($event)" role="button" tabindex="0">7</label>
+        </div>
+        <div class="three-columns">
+          <input type="radio" value="8" name="comb-button" id="btn8" [checked]="nrNumbers === 8">
+          <label for="btn8" (click)="autoPick($event)" (keydown)="pickKeyPressed($event)" role="button" tabindex="0">8</label>
+          <input type="radio" value="9" name="comb-button" id="btn9" [checked]="nrNumbers === 9">
+          <label for="btn9" (click)="autoPick($event)" (keydown)="pickKeyPressed($event)" role="button" tabindex="0">9</label>
+          <input type="radio" value="10" name="comb-button" id="btn10" [checked]="nrNumbers === 10">
+          <label for="btn10" (click)="autoPick($event)" (keydown)="pickKeyPressed($event)" role="button" tabindex="0">10</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="draw-information">
+    <label>{{drawInfoText}}</label>
+    <input type="text" size="1" value="234567/2:24" readonly>
+  </div>
+  <div id="stake-input">
+    <div id="stake-content-hor">
+      <label>{{stakeBtnText}}</label>
+      <div id="stake-buttons">
+        <div class="three-columns">
+          <input type="radio" value="0.1" name="stake-button" id="stk01" [checked]="stakePerComb === 0.1">
+          <label for="stk01" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">0.1</label>
+          <input type="radio" value="0.5" name="stake-button" id="stk05" [checked]="stakePerComb === 0.5">
+          <label for="stk05" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">0.5</label>
+        </div>
+        <div class="three-columns">
+          <input type="radio" value="1.0" name="stake-button" id="stk10" [checked]="stakePerComb === 1.0">
+          <label for="stk10" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">1.0</label>
+          <input type="radio" value="2.0" name="stake-button" id="stk20" [checked]="stakePerComb === 2.0">
+          <label for="stk20" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">2.0</label>
+          <div><input type="text" size="1" [(ngModel)]="stakePerComb"></div>
+        </div>
+      </div>
+    </div>
+    <div id="stake-content-ver">
+      <label>{{stakeBtnText}}</label>
+      <input type="radio" value="0.1" name="stake-button" id="stkh01" [checked]="stakePerComb === 0.1">
+      <label for="stkh01" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">0.1</label>
+      <input type="radio" value="0.5" name="stake-button" id="stkh05" [checked]="stakePerComb === 0.5">
+      <label for="stkh05" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">0.5</label>
+      <input type="radio" value="1.0" name="stake-button" id="stkh10" [checked]="stakePerComb === 1.0">
+      <label for="stkh10" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">1.0</label>
+      <input type="radio" value="2.0" name="stake-button" id="stkh20" [checked]="stakePerComb === 2.0">
+      <label for="stkh20" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">2.0</label>
+      <div><input type="text" size="1" [(ngModel)]="stakePerComb"></div>
+    </div>
+  </div>
+  <div id="stake-info">
+    <label>{{stakeInfoText}}</label>
+    <input type="text" size="1" value="{{stakeAmount}}" readonly>
+  </div>
+  <div id="command-buttons">
+    <div></div>
+    <input type="button" value="{{cancelText}}" (click)="cancel()">
+    <div></div>
+    <input type="button" value="{{saveText}}">
+    <div></div>
+  </div>
+</div>
