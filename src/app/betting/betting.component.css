@@ -12,67 +12,68 @@
     color: white;
 }
 .brd-red {
-    box-shadow: 0 1px 4px 1px rgba(255, 0, 0, 0.5), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
+    box-shadow: 0 1px 4px 1px rgba(255, 0, 0, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
 }
 .yellow {
     background: #FFD100;
     color: black;
 }
 .brd-yellow {
-    box-shadow: 0 1px 4px 1px rgba(255, 208, 0, 0.45), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.6);    
+    box-shadow: 0 1px 4px 1px rgba(255, 208, 0, 0.5), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.6);    
 }
 .blue {
     background: #00AFFF;
     color: white;
 }
 .brd-blue {
-    box-shadow: 0 1px 4px 1px rgba(0, 174, 255, 0.5), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.5);    
+    box-shadow: 0 1px 4px 1px rgba(0, 174, 255, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.5);    
 }
 .orange {
     background: #EA6000;
     color: white;
 }
 .brd-orange {
-    box-shadow: 0 1px 4px 1px rgba(234, 98, 0, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
+    box-shadow: 0 1px 4px 1px rgba(234, 98, 0, 0.7), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
 }
 .green {
     background: #00D61D;
     color: black;
 }
 .brd-green {
-    box-shadow: 0 1px 4px 1px rgba(0, 214, 29, 0.5), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
+    box-shadow: 0 1px 4px 1px rgba(0, 214, 29, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
 }
 .rose {
     background: #FF37F6;
     color: white;
 }
 .brd-rose {
-    box-shadow: 0 1px 4px 1px rgba(255, 55, 245, 0.5), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
+    box-shadow: 0 1px 4px 1px rgba(255, 55, 245, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
 }
 .purple {
     background: #8C00FF;
     color: white;
 }
 .brd-purple {
-    box-shadow: 0 1px 4px 1px rgba(140, 0, 255, 0.65), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
+    box-shadow: 0 1px 4px 1px rgba(140, 0, 255, 0.75), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
 }
 input[type="radio"], input[type="checkbox"] {
     display: none;
 }
 #pick-buttons input + label {
-    background: rgba(221, 102, 33, 0.5);
+    background: rgba(26, 102, 183, 0.5);
 }
 #stake-buttons input + label,
 #stake-content-ver input + label {
-    background: rgba(177, 82, 27, 0.5);
+    background: rgba(26, 102, 183, 0.5);
 }
 #pick-buttons input + label,
 #stake-buttons input + label,
 #stake-content-ver input + label {
     position: relative;
+    border-radius: 10%;
     text-align: center;
-    color: wheat;
-    font-family: Arial Black, Helvetica, sans-serif;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: sans-serif;
     text-shadow: 0 2px 1px rgba(0,0,0,0.5);
     font-weight: bold;
     box-shadow: 0 1px 2px 1px rgba(0,0,0,0.35);
@@ -95,6 +96,7 @@ input[type="radio"], input[type="checkbox"] {
     position: relative;
     background: silver;
     color: white;
+    text-shadow: -1px 2px 5px rgba(0,0,0,0.5), 1px 2px 5px rgba(0,0,0,0.5);
     box-shadow: 0 2px 5px 1px rgba(0,0,0,0.5);
 }
 #pick-buttons input:checked + label:after,
@@ -106,7 +108,7 @@ input[type="radio"], input[type="checkbox"] {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(rgba(255,255,255,1),rgba(255,255,255,0.85) 10%, transparent 12%);
+    background: linear-gradient(rgba(255,255,255,1),rgba(255,255,255,0.95) 10%, transparent 12%);
 }
 #pick-buttons input + label:active,
 #stake-buttons input + label:active,
@@ -118,39 +120,45 @@ input[type="radio"], input[type="checkbox"] {
 }
 #main-container {
     padding: 1vw;
-    background-image: linear-gradient(180deg, rgba(221,115,44,1) 0, rgba(66,11,1,1) 100%);
+    background-image: linear-gradient(180deg, rgb(26, 102, 183) 0, rgb(17, 65, 116) 100%);
     background-position: 50% 50%;
 }
 #betting-buttons {
     padding: 0.5vw;
-    background-image: linear-gradient(180deg, rgb(153, 76, 24) 0, rgba(66,11,1,1) 100%);
+    background-image: linear-gradient(180deg, rgb(20, 77, 138) 0, rgb(10, 40, 72) 100%);
     background-position: 50% 50%;
 }
 #auto-pick {
     padding: 0.5vw;
-    background-image: linear-gradient(180deg, rgb(153, 76, 24) 0, rgb(129, 58, 18) 100%);
+    background-image: linear-gradient(180deg, rgb(20, 77, 138) 0, rgb(17, 67, 119) 100%);
 }
 #draw-information {
     overflow: hidden;
-    padding: 0.5vw;
+    padding: 0.5vw 0;
 }
 #stake-input {
     padding: 0.5vw;
-    background-image: linear-gradient(180deg, rgb(108, 43, 12) 0, rgb(84, 25, 6) 100%);
+    background-image: linear-gradient(180deg, rgb(15, 58, 105) 0, hsl(212, 76%, 14%) 100%);
+}
+#stake-input input[type="text"] {
+    text-align: center;
 }
 #stake-info {
     overflow: hidden;
-    padding: 0.5vw;
+    padding: 0.5vw 0;
 }
 #stake-content-hor {
     height: 100%;
 }
-#stake-content-hor input[type="text"]  {
+#stake-input input[type="text"],
+input[type="number"]  {
     overflow: hidden;
     height: 100%;
+    color: #0d3158;
+    font-size: 100%;
 }
 #command-buttons {
-    background-image: linear-gradient(180deg, rgb(108, 43, 12) 0, rgb(180, 90, 47) 7%, rgb(108, 43, 12) 15%, rgb(84, 25, 6) 85%, rgb(38, 12, 3) 100%);
+    background-image: linear-gradient(180deg, rgb(0, 44, 91) 0, rgb(26, 102, 183) 6%, rgb(20, 77, 138) 15%, rgb(10, 40, 72) 85%, hsla(211, 76%, 11%, 1) 100%);
     margin-left: -1vw;
     margin-right: -1vw;
 }
@@ -162,20 +170,41 @@ input[type="radio"], input[type="checkbox"] {
 #stake-content-hor > label,
 #stake-content-ver > label,
 #stake-info > label {
-    color: wheat;
+    color: white;
     font-weight: 500;
 }
 button,
 label[role="button"],
 input[type="button"],
-input[type="text"] {
+#stake-input input[type="text"],
+#stake-info input[type="number"] {
     cursor: pointer;
+}
+#draw-information label {
+    text-align: center;
+}
+#draw-information input[type="text"] {
+    border: none;
+    background: rgba(255, 255, 255, 0.75);
+    font-size: 130%;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(15, 58, 105);
+}
+#stake-info label {
+    text-align: center;
+    margin-right: 2em;
+}
+#stake-info input[type="number"] {
+    font-size: 130%;
+    font-weight: bold;
+    text-align: center;
 }
 button:focus,
 label[role="button"]:focus,
 input[type="button"]:focus,
-input[type="text"]:focus {
-    outline: 1px solid rgba(253, 103, 3, 0.5);
+input[type="number"]:focus {
+    outline: 1px solid rgba(26, 102, 183, 0.5);
 }
 .bet-button-inner {
     position: relative;
@@ -185,10 +214,11 @@ input[type="text"]:focus {
     font-family: Arial Black, Helvetica, sans-serif;
 	text-align: center;
     text-shadow: 0 2px 1px rgba(0,0,0,0.5);
-    border-top: none;
+    border: none;
+    /* border-top: none;
     border-left: none;
     border-right: none;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.75); */
 }
 .bet-button-inner:after {
     content: "";
@@ -198,7 +228,7 @@ input[type="text"]:focus {
     left: 0;
     right: 0;
     border-radius: 50%;
-    box-shadow: 0px 2px 4px 1px rgba(12, 12, 12, 0.9);
+    box-shadow: 0px 2px 1px 1px rgba(12, 12, 12, 0.9);
     background: radial-gradient(circle at 50% 3%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5) 10%,  rgba(255, 255, 255, 0) 20%);
     filter: blur(3px);
 }
@@ -210,8 +240,8 @@ input[type="text"]:focus {
     border: 1px solid rgba(0, 0, 0, 0.2);
 	text-align: center;
     text-shadow: 0 2px 1px rgba(0,0,0,0.5);
-    background: rgba(221,115,44,0.2);
-    color: rgba(241, 197, 167, 0.9);
+    background: rgba(26, 102, 183, 0.5);
+    color: rgba(255, 255, 255, 0.8);
 }
 .color-button-inner {
     position: relative;
@@ -234,8 +264,8 @@ input[type="text"]:focus {
     transform: scale(0.95);
 }
 .row-button-inner {
-    color: rgb(84, 25, 6);
-    background: rgba(234, 96, 0, 0.4);
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(26, 102, 183, 0.5);
     box-shadow: 0 2px 5px -2px rgba(255,255,255,0.5) inset, 0 1px 2px 1px rgba(0,0,0,0.4);
     position: relative;
     border: none;
@@ -258,16 +288,16 @@ input[type="text"]:focus {
 #command-buttons input[type="button"] {
     position: relative;
     margin: 0.75vw 0 0.5vw 0;
-    color: wheat;
+    color: white;
     border: none;
     border-radius: 10% / 35%;
     font-size: 150%;
-    background: linear-gradient(180deg, rgb(160, 71, 13) 0%, rgb(137, 47, 5) 100%);
+    background: linear-gradient(180deg, rgba(26, 102, 183, 0.5) 0%, rgba(26, 102, 183, 0.5) 100%);
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     text-shadow: 0 2px 1px rgba(0,0,0,0.5);
     font-weight: 600;
-    box-shadow: 0 -2px 8px 1px rgb(39, 13, 1) inset, 0 1px 2px 1px rgba(0,0,0,0.35), 0 2px 5px -1px rgba(255,255,255,0.85) inset;
+    box-shadow: 0 -2px 8px 1px rgba(0,0,0,0.7) inset, 0 1px 2px 1px rgba(0,0,0,0.35), 0 2px 5px -1px rgba(255,255,255,0.85) inset;
 }
 #command-buttons input[type="button"]:active {
     transform: scale(0.95);

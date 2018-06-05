@@ -11,6 +11,10 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
   @ViewChild('rowButton') rowButton: ElementRef;
   @ViewChild('rowButtonInner') rowButtonInner: ElementRef;
   @ViewChild('betButton') betButton: ElementRef;
+  @ViewChild('horStake') horStake: ElementRef;
+  @ViewChild('verStake') verStake: ElementRef;
+  horMaxWidth: number;
+  verMaxWidth: number;
   colMarginTop: number;
   rowMarginTop: number;
   butMarginTop: number;
@@ -169,6 +173,8 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
       // console.log(`(s >= w) clientHeight ${this.betButton.nativeElement.clientHeight} clientWidth ${this.betButton.nativeElement.clientWidth}`);
       this.butMarginTop = (this.betButton.nativeElement.clientHeight - this.betButton.nativeElement.clientWidth) / 2;
     }
+    this.horMaxWidth = this.horStake.nativeElement.clientWidth;
+    this.verMaxWidth = this.verStake.nativeElement.clientWidth;
 
     // var colButtons = document.querySelectorAll('.color-button');
     // var colButtonsInner = document.querySelectorAll('.color-button-inner');

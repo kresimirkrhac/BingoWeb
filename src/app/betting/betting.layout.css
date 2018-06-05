@@ -123,12 +123,12 @@
     }
     #pick-buttons input + label {
         font-size: 170%;
-        padding-top: 5%;
+        padding-top: 15%;
         letter-spacing: -2px;
     }
     #stake-buttons input + label,
     #stake-content-ver input + label {
         font-size: 130%;
-        padding-top: 15%;
+        padding-top: 25%;
     }
 }
