@@ -12,49 +12,49 @@
     color: white;
 }
 .brd-red {
-    box-shadow: 0 1px 4px 1px rgba(255, 0, 0, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
+    box-shadow: 0 1px 4px 1px rgba(255, 0, 0, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
 }
 .yellow {
     background: #FFD100;
     color: black;
 }
 .brd-yellow {
-    box-shadow: 0 1px 4px 1px rgba(255, 208, 0, 0.5), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.6);    
+    box-shadow: 0 1px 4px 1px rgba(255, 208, 0, 0.5), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.6);    
 }
 .blue {
     background: #00AFFF;
     color: white;
 }
 .brd-blue {
-    box-shadow: 0 1px 4px 1px rgba(0, 174, 255, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.5);    
+    box-shadow: 0 1px 4px 1px rgba(0, 174, 255, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.5);    
 }
 .orange {
     background: #EA6000;
     color: white;
 }
 .brd-orange {
-    box-shadow: 0 1px 4px 1px rgba(234, 98, 0, 0.7), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
+    box-shadow: 0 1px 4px 1px rgba(234, 98, 0, 0.7), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
 }
 .green {
     background: #00D61D;
     color: black;
 }
 .brd-green {
-    box-shadow: 0 1px 4px 1px rgba(0, 214, 29, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
+    box-shadow: 0 1px 4px 1px rgba(0, 214, 29, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
 }
 .rose {
     background: #FF37F6;
     color: white;
 }
 .brd-rose {
-    box-shadow: 0 1px 4px 1px rgba(255, 55, 245, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
+    box-shadow: 0 1px 4px 1px rgba(255, 55, 245, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
 }
 .purple {
     background: #8C00FF;
     color: white;
 }
 .brd-purple {
-    box-shadow: 0 1px 4px 1px rgba(140, 0, 255, 0.75), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(88, 26, 7, 0.5) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
+    box-shadow: 0 1px 4px 1px rgba(140, 0, 255, 0.75), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
 }
 input[type="radio"], input[type="checkbox"] {
     display: none;
@@ -70,13 +70,13 @@ input[type="radio"], input[type="checkbox"] {
 #stake-buttons input + label,
 #stake-content-ver input + label {
     position: relative;
-    border-radius: 10%;
+    border-radius: 20%;
     text-align: center;
     color: rgba(255, 255, 255, 0.8);
     font-family: sans-serif;
     text-shadow: 0 2px 1px rgba(0,0,0,0.5);
     font-weight: bold;
-    box-shadow: 0 1px 2px 1px rgba(0,0,0,0.35);
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.35);
 }
 #pick-buttons input + label:after,
 #stake-buttons input + label:after,
@@ -87,7 +87,8 @@ input[type="radio"], input[type="checkbox"] {
     bottom: 0;
     left: 0;
     right: 0;
-    box-shadow: 0 -2px 8px 1px rgba(0,0,0,0.75) inset, 0 2px 5px -1px rgba(255,255,255,0.95) inset;
+    box-shadow: 0 -1px 3px 0px rgba(0,0,0,0.95) inset, 0 1px 3px 0px rgba(0,0,0,0.95) inset;
+    border-radius: 20%;
     filter: blur(2px);
 }
 #pick-buttons input:checked + label,
@@ -97,7 +98,7 @@ input[type="radio"], input[type="checkbox"] {
     background: silver;
     color: white;
     text-shadow: -1px 2px 5px rgba(0,0,0,0.5), 1px 2px 5px rgba(0,0,0,0.5);
-    box-shadow: 0 2px 5px 1px rgba(0,0,0,0.5);
+    box-shadow: 0 2px 8px 1px rgba(0,0,0,0.5);
 }
 #pick-buttons input:checked + label:after,
 #stake-buttons input:checked + label:after,
@@ -108,7 +109,7 @@ input[type="radio"], input[type="checkbox"] {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(rgba(255,255,255,1),rgba(255,255,255,0.95) 10%, transparent 12%);
+    background-image: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,0.95) 10%, transparent 12%);
 }
 #pick-buttons input + label:active,
 #stake-buttons input + label:active,
@@ -156,6 +157,7 @@ input[type="number"]  {
     height: 100%;
     color: #0d3158;
     font-size: 100%;
+    font-weight: bold;
 }
 #command-buttons {
     background-image: linear-gradient(180deg, rgb(0, 44, 91) 0, rgb(26, 102, 183) 6%, rgb(20, 77, 138) 15%, rgb(10, 40, 72) 85%, hsla(211, 76%, 11%, 1) 100%);
@@ -297,7 +299,7 @@ input[type="number"]:focus {
     font-family: Arial, Helvetica, sans-serif;
     text-shadow: 0 2px 1px rgba(0,0,0,0.5);
     font-weight: 600;
-    box-shadow: 0 -2px 8px 1px rgba(0,0,0,0.7) inset, 0 1px 2px 1px rgba(0,0,0,0.35), 0 2px 5px -1px rgba(255,255,255,0.85) inset;
+    box-shadow: 0 2px 5px -1px rgba(255,255,255,0.85) inset, 0 -2px 8px 1px rgba(0,0,0,0.7) inset, 0 1px 2px 1px rgba(0,0,0,0.35);
 }
 #command-buttons input[type="button"]:active {
     transform: scale(0.95);
