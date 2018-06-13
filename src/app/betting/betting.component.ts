@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterContentInit, AfterContentChecked, ViewChild, ElementRef } from '@angular/core';
+import { BettingServiceService } from '../services/betting-service.service';
 
 @Component({
   selector: 'app-betting',
@@ -26,21 +27,34 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
   drawInfoText: string = "Izvlačenje";
   cancelText: string = "Poništi";
   saveText: string = "Spremi";
-  nrComb: number[] = [1,7,28,84,210];
+  nrComb: number[] = [1, 7, 28, 84, 210];
   nrNumbers: number = 0;
-  stakeAmount: number;
-  stakePerComb: number = 0.00;
+  stakeAmount: string = "0.00";
+  stakePerComb: string = "0.00";
+  oldValue: string;
   betButtons: any[] = [];
-  colors: string[] = ["red", "yellow", "blue", "orange", "green", "rose", "purple" ];
-  border: string[] = ["brd-red", "brd-yellow", "brd-blue", "brd-orange", "brd-green", "brd-rose", "brd-purple" ];
+  colors: string[] = ["red", "yellow", "blue", "orange", "green", "rose", "purple"];
+  border: string[] = ["brd-red", "brd-yellow", "brd-blue", "brd-orange", "brd-green", "brd-rose", "brd-purple"];
   doResize: boolean;
   nrResize: number;
-  
-  constructor() {  }
+
+  constructor(private bettingService: BettingServiceService) { }
 
   ngOnInit() {
-    for(var i = 0; i < 49; i++) {
-      this.betButtons.push({ checked: false, color: this.colors[i%7], border: this.border[i%7], value: i+1});
+    for (var i = 0; i < 49; i++) {
+      this.betButtons.push({ checked: false, color: this.colors[i % 7], border: this.border[i % 7], value: i + 1 });
+    }
+    this.getToken();
+  }
+
+  async getToken() {
+    try {
+      await this.bettingService.getToken()
+        .then((data: any) => {
+          console.log(`data ${data}`);
+        });
+    } catch (err) {
+      console.log(`greska ${err}`);
     }
   }
 
@@ -52,7 +66,7 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
   ngAfterContentChecked() {
     if (this.doResize && this.nrResize < 2) {
       // if (this.nrResize == 1) {
-        this.Resize();
+      this.Resize();
       // }
       this.nrResize++;
     }
@@ -62,21 +76,41 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
     }
   }
 
+  private stakePerCombIn() {
+    this.oldValue = this.stakePerComb;
+  }
+  private stakePerCombOut() {
+    if (this.oldValue !== this.stakePerComb) {
+      this.clacStakeAmount();
+      this.stakePerComb = parseFloat(this.stakePerComb).toFixed(2);
+    }
+  }
+  private stakeAmountIn() {
+    this.oldValue = this.stakeAmount;
+  }
+  private stakeAmountOut() {
+    if (this.oldValue !== this.stakeAmount) {
+      this.clacStakePerComb();
+      this.stakeAmount = parseFloat(this.stakeAmount).toFixed(2);
+
+    }
+  }
+
   private betButtonChecked(event: any) {
     var index = event.path["0"].innerHTML;
-    if (this.betButtons[index-1].checked == false && this.nrNumbers == 10) {
+    if (this.betButtons[index - 1].checked == false && this.nrNumbers == 10) {
       return;
     }
-    if (this.betButtons[index-1].checked == false) {
+    if (this.betButtons[index - 1].checked == false) {
       this.nrNumbers++;
     }
     else {
       this.nrNumbers--;
     }
-    this.betButtons[index-1].checked = !this.betButtons[index-1].checked;
+    this.betButtons[index - 1].checked = !this.betButtons[index - 1].checked;
     this.clacStakeAmount();
   }
-  
+
   // getNrNumbers(): number {
   //   var nrChecked = 0;
   //   for (var i = 0; i < this.betButtons.length; i++) {
@@ -87,42 +121,44 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
   //   return nrChecked;
   // }
 
-  private colorButtonChecked(index: number) {
+  private colorButtonChecked(index: number, event: any) {
     for (var i = 0; i < this.betButtons.length; i++) {
       if ((i % 7) == index) {
         this.betButtons[i].checked = true;
       }
       else {
-        this.betButtons[i].checked = false;        
+        this.betButtons[i].checked = false;
       }
     }
     this.nrNumbers = 7;
     this.clacStakeAmount();
+    event.target.style.outline = "none";
   }
 
-  private rowButtonChecked(index: number ) {
+  private rowButtonChecked(index: number, event: any) {
     for (var i = 0; i < this.betButtons.length; i++) {
-      if (i >= index * 7 && i < (index+1) * 7) {
+      if (i >= index * 7 && i < (index + 1) * 7) {
         this.betButtons[i].checked = true;
       }
       else {
-        this.betButtons[i].checked = false;        
+        this.betButtons[i].checked = false;
       }
     }
     this.nrNumbers = 7;
     this.clacStakeAmount();
+    event.target.style.outline = "none";
   }
 
   private autoPick(event: any) {
     var nrToPick = event.path["0"].innerHTML;
     var nrPicked = 0;
-    var picked : number;
+    var picked: number;
     for (var i = 0; i < this.betButtons.length; i++) {
       if (this.betButtons[i].checked == true) {
         this.betButtons[i].checked = false;
       }
     }
-    while(nrPicked < nrToPick) {
+    while (nrPicked < nrToPick) {
       picked = Math.floor(Math.random() * this.betButtons.length);
       if (this.betButtons[picked].checked != true) {
         this.betButtons[picked].checked = true;
@@ -131,32 +167,55 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
     }
     this.nrNumbers = nrPicked;
     this.clacStakeAmount();
+    event.target.style.outline = "none";
   }
 
   stakeClicked(event: any) {
     this.stakePerComb = event.path["0"].innerHTML;
     this.clacStakeAmount();
+    event.target.style.outline = "none";
   }
 
   private clacStakeAmount() {
-    this.stakeAmount = 0.00;
+    this.stakeAmount = "0.00";
     if (this.nrNumbers < 6 || this.nrNumbers > 10) {
       return;
     }
-    if (this.stakePerComb < 0.01) {
+    if (parseFloat(this.stakePerComb) < 0.01) {
       return;
     }
-    this.stakeAmount = Math.round(this.nrComb[this.nrNumbers-6] * this.stakePerComb * 100) / 100;
+    this.stakeAmount = (Math.round(this.nrComb[this.nrNumbers - 6] * parseFloat(this.stakePerComb) * 100) / 100).toFixed(2);
   }
-  private cancel() {
+
+  private clacStakePerComb() {
+    this.stakePerComb = "0.00";
+    if (this.nrNumbers < 6 || this.nrNumbers > 10) {
+      return;
+    }
+    if (parseFloat(this.stakeAmount) < 0.01) {
+      return;
+    }
+    this.stakePerComb = (Math.round(parseFloat(this.stakeAmount) / this.nrComb[this.nrNumbers - 6] * 100) / 100).toFixed(2);
+  }
+
+  private cancel(event: any) {
     for (var i = 0; i < this.betButtons.length; i++) {
       if (this.betButtons[i].checked == true) {
         this.betButtons[i].checked = false;
       }
     }
     this.nrNumbers = 0;
-    this.stakePerComb = 0.00;
-    this.stakeAmount = 0.00;
+    this.stakePerComb = "0.00";
+    this.stakeAmount = "0.00";
+    event.target.style.outline = "none";
+    console.log(`stakePerComb => ${this.stakePerComb}`);
+  }
+  private canSave(): boolean {
+    var canNotSave: boolean = true;
+    if (this.nrNumbers < 6 || this.nrNumbers > 10) { canNotSave = true; }
+    else if (parseFloat(this.stakeAmount) < 1.00) { canNotSave = true; }
+    else { canNotSave = false }
+    return canNotSave;
   }
 
   private Resize() {

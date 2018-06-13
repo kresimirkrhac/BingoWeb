@@ -24,28 +24,28 @@
   <div id="betting-buttons">
     <div></div>
     <div #colorButton class="color-button">
-      <button #colorButtonInner (click)="colorButtonChecked(0)" class="color-button-inner red" [style.marginTop.px]="colMarginTop"></button>
+      <button #colorButtonInner (click)="colorButtonChecked(0,$event)" class="color-button-inner red" [style.marginTop.px]="colMarginTop"></button>
     </div>
     <div class="color-button">
-      <button (click)="colorButtonChecked(1)" class="color-button-inner yellow" [style.marginTop.px]="colMarginTop"></button>
+      <button (click)="colorButtonChecked(1,$event)" class="color-button-inner yellow" [style.marginTop.px]="colMarginTop"></button>
     </div>
     <div class="color-button">
-      <button (click)="colorButtonChecked(2)" class="color-button-inner blue" [style.marginTop.px]="colMarginTop"></button>
+      <button (click)="colorButtonChecked(2,$event)" class="color-button-inner blue" [style.marginTop.px]="colMarginTop"></button>
     </div>
     <div class="color-button">
-      <button (click)="colorButtonChecked(3)" class="color-button-inner orange" [style.marginTop.px]="colMarginTop"></button>
+      <button (click)="colorButtonChecked(3,$event)" class="color-button-inner orange" [style.marginTop.px]="colMarginTop"></button>
     </div>
     <div class="color-button">
-      <button (click)="colorButtonChecked(4)" class="color-button-inner green" [style.marginTop.px]="colMarginTop"></button>
+      <button (click)="colorButtonChecked(4,$event)" class="color-button-inner green" [style.marginTop.px]="colMarginTop"></button>
     </div>
     <div class="color-button">
-      <button (click)="colorButtonChecked(5)" class="color-button-inner rose" [style.marginTop.px]="colMarginTop"></button>
+      <button (click)="colorButtonChecked(5,$event)" class="color-button-inner rose" [style.marginTop.px]="colMarginTop"></button>
     </div>
     <div class="color-button">
-      <button (click)="colorButtonChecked(6)" class="color-button-inner purple" [style.marginTop.px]="colMarginTop"></button>
+      <button (click)="colorButtonChecked(6,$event)" class="color-button-inner purple" [style.marginTop.px]="colMarginTop"></button>
     </div>
     <div #rowButton class="row-button">
-      <button #rowButtonInner (click)="rowButtonChecked(0)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+      <button #rowButtonInner (click)="rowButtonChecked(0,$event)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
     </div>
     <div #betButton class="bet-button">
         <ng-container [ngTemplateOutlet]='betButtons[0].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[0]}"></ng-container>
@@ -69,7 +69,7 @@
       <ng-container [ngTemplateOutlet]='betButtons[6].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[6]}"></ng-container>
     </div>
     <div class="row-button">
-      <button (click)="rowButtonChecked(1)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+      <button (click)="rowButtonChecked(1,$event)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
     </div>
     <div class="bet-button">
       <ng-container [ngTemplateOutlet]='betButtons[7].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[7]}"></ng-container>
@@ -93,7 +93,7 @@
       <ng-container [ngTemplateOutlet]='betButtons[13].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[13]}"></ng-container>
     </div>
     <div class="row-button">
-      <button (click)="rowButtonChecked(2)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+      <button (click)="rowButtonChecked(2,$event)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
     </div>
     <div class="bet-button">
       <ng-container [ngTemplateOutlet]='betButtons[14].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[14]}"></ng-container>
@@ -117,7 +117,7 @@
       <ng-container [ngTemplateOutlet]='betButtons[20].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[20]}"></ng-container>
     </div>
     <div class="row-button">
-      <button (click)="rowButtonChecked(3)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+      <button (click)="rowButtonChecked(3,$event)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
     </div>
     <div class="bet-button">
       <ng-container [ngTemplateOutlet]='betButtons[21].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[21]}"></ng-container>
@@ -141,7 +141,7 @@
       <ng-container [ngTemplateOutlet]='betButtons[27].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[27]}"></ng-container>
     </div>
     <div class="row-button">
-      <button (click)="rowButtonChecked(4)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+      <button (click)="rowButtonChecked(4,$event)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
     </div>
     <div class="bet-button">
       <ng-container [ngTemplateOutlet]='betButtons[28].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[28]}"></ng-container>
@@ -165,7 +165,7 @@
       <ng-container [ngTemplateOutlet]='betButtons[34].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[34]}"></ng-container>
     </div>
     <div class="row-button">
-      <button (click)="rowButtonChecked(5)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+      <button (click)="rowButtonChecked(5,$event)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
     </div>
     <div class="bet-button">
       <ng-container [ngTemplateOutlet]='betButtons[35].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[35]}"></ng-container>
@@ -189,7 +189,7 @@
       <ng-container [ngTemplateOutlet]='betButtons[41].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[41]}"></ng-container>
     </div>
     <div class="row-button">
-      <button (click)="rowButtonChecked(6)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
+      <button (click)="rowButtonChecked(6,$event)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
     </div>
     <div class="bet-button">
       <ng-container [ngTemplateOutlet]='betButtons[42].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[42]}"></ng-container>
@@ -243,42 +243,42 @@
       <label>{{stakeBtnText}}</label>
       <div id="stake-buttons">
         <div class="three-columns">
-          <input type="radio" value="0.1" name="stake-button" id="stk01" [checked]="stakePerComb === 0.1">
+          <input type="radio" value="0.1" name="stake-button" id="stk01" [checked]="stakePerComb === '0.1'">
           <label for="stk01" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">0.1</label>
-          <input type="radio" value="0.5" name="stake-button" id="stk05" [checked]="stakePerComb === 0.5">
+          <input type="radio" value="0.5" name="stake-button" id="stk05" [checked]="stakePerComb === '0.5'">
           <label for="stk05" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">0.5</label>
         </div>
         <div class="three-columns">
-          <input type="radio" value="1.0" name="stake-button" id="stk10" [checked]="stakePerComb === 1.0">
+          <input type="radio" value="1.0" name="stake-button" id="stk10" [checked]="stakePerComb === '1.0'">
           <label for="stk10" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">1.0</label>
-          <input type="radio" value="2.0" name="stake-button" id="stk20" [checked]="stakePerComb === 2.0">
+          <input type="radio" value="2.0" name="stake-button" id="stk20" [checked]="stakePerComb === '2.0'">
           <label for="stk20" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">2.0</label>
-          <div #horStake><input type="text" size="1" [(ngModel)]="stakePerComb" [ngStyle]="{'width.px': horMaxWidth}"></div>
+          <div #horStake><input type="text" size="1" [(ngModel)]="stakePerComb" [ngStyle]="{'width.px': horMaxWidth}" (focus)="stakePerCombIn()" (focusout)="stakePerCombOut()"></div>
         </div>
       </div>
     </div>
     <div id="stake-content-ver">
       <label>{{stakeBtnText}}</label>
-      <input type="radio" value="0.1" name="stake-button" id="stkh01" [checked]="stakePerComb === 0.1">
+      <input type="radio" value="0.1" name="stake-button" id="stkh01" [checked]="stakePerComb === '0.1'">
       <label for="stkh01" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">0.1</label>
-      <input type="radio" value="0.5" name="stake-button" id="stkh05" [checked]="stakePerComb === 0.5">
+      <input type="radio" value="0.5" name="stake-button" id="stkh05" [checked]="stakePerComb === '0.5'">
       <label for="stkh05" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">0.5</label>
-      <input type="radio" value="1.0" name="stake-button" id="stkh10" [checked]="stakePerComb === 1.0">
+      <input type="radio" value="1.0" name="stake-button" id="stkh10" [checked]="stakePerComb === '1.0'">
       <label for="stkh10" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">1.0</label>
-      <input type="radio" value="2.0" name="stake-button" id="stkh20" [checked]="stakePerComb === 2.0">
+      <input type="radio" value="2.0" name="stake-button" id="stkh20" [checked]="stakePerComb === '2.0'">
       <label for="stkh20" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">2.0</label>
-      <div #verStake><input type="number" size="1" step="0.01" [(ngModel)]="stakePerComb" [ngStyle]="{'width.px': verMaxWidth}"></div>
+      <div #verStake><input type="number" size="1" step="0.01" [(ngModel)]="stakePerComb" [ngStyle]="{'width.px': verMaxWidth}" (focus)="stakePerCombIn()" (focusout)="stakePerCombOut()"></div>
     </div>
   </div>
   <div id="stake-info">
     <label>{{stakeInfoText}}</label>
-    <input type="number" size="1" step="0.10" value="{{stakeAmount | number:'1.2-2'}}">
+    <input type="number" size="1" step="0.10" [(ngModel)]="stakeAmount" (focus)="stakeAmountIn()" (focusout)="stakeAmountOut()">
   </div>
   <div id="command-buttons">
     <div></div>
-    <input type="button" value="{{cancelText}}" (click)="cancel()">
+    <input type="button" value="{{cancelText}}" (click)="cancel($event)">
     <div></div>
-    <input type="button" value="{{saveText}}">
+    <input type="button" value="{{saveText}}" [disabled]="canSave()">
     <div></div>
   </div>
 </div>

@@ -87,7 +87,7 @@ input[type="radio"], input[type="checkbox"] {
     bottom: 0;
     left: 0;
     right: 0;
-    box-shadow: 0 -1px 3px 0px rgba(0,0,0,0.95) inset, 0 1px 3px 0px rgba(0,0,0,0.95) inset;
+    box-shadow: 0 -1px 3px 0px rgba(0,0,0,0.95) inset;
     border-radius: 20%;
     filter: blur(2px);
 }
@@ -97,8 +97,9 @@ input[type="radio"], input[type="checkbox"] {
     position: relative;
     background: silver;
     color: white;
+    border-radius: 20%;
     text-shadow: -1px 2px 5px rgba(0,0,0,0.5), 1px 2px 5px rgba(0,0,0,0.5);
-    box-shadow: 0 2px 8px 1px rgba(0,0,0,0.5);
+    box-shadow: 0 -2px 5px 0px rgba(0,0,0,0.5) inset;
 }
 #pick-buttons input:checked + label:after,
 #stake-buttons input:checked + label:after,
@@ -109,7 +110,9 @@ input[type="radio"], input[type="checkbox"] {
     left: 0;
     right: 0;
     bottom: 0;
+    border-radius: 20%;
     background-image: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,0.95) 10%, transparent 12%);
+    box-shadow: 0 3px 3px 0px rgba(0,0,0,0.75);
 }
 #pick-buttons input + label:active,
 #stake-buttons input + label:active,
@@ -139,7 +142,7 @@ input[type="radio"], input[type="checkbox"] {
 }
 #stake-input {
     padding: 0.5vw;
-    background-image: linear-gradient(180deg, rgb(15, 58, 105) 0, hsl(212, 76%, 14%) 100%);
+    background-image: linear-gradient(180deg, rgb(15, 58, 105) 0, rgb(12, 48, 86) 100%);
 }
 #stake-input input[type="text"] {
     text-align: center;
@@ -193,14 +196,14 @@ input[type="button"],
     text-align: center;
     color: rgb(15, 58, 105);
 }
-#stake-info label {
-    text-align: center;
-    margin-right: 2em;
+#stake-info > label {
+    text-align: right;
+    margin-right: 1em;
 }
 #stake-info input[type="number"] {
     font-size: 130%;
     font-weight: bold;
-    text-align: center;
+    text-align: right;
 }
 button:focus,
 label[role="button"]:focus,
@@ -217,10 +220,6 @@ input[type="number"]:focus {
 	text-align: center;
     text-shadow: 0 2px 1px rgba(0,0,0,0.5);
     border: none;
-    /* border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.75); */
 }
 .bet-button-inner:after {
     content: "";
@@ -292,9 +291,9 @@ input[type="number"]:focus {
     margin: 0.75vw 0 0.5vw 0;
     color: white;
     border: none;
-    border-radius: 10% / 35%;
+    border-radius: 5% / 20%;
     font-size: 150%;
-    background: linear-gradient(180deg, rgba(26, 102, 183, 0.5) 0%, rgba(26, 102, 183, 0.5) 100%);
+    background: linear-gradient(180deg, #00AFFF 0%, rgb(0, 104, 153) 100%);
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     text-shadow: 0 2px 1px rgba(0,0,0,0.5);
@@ -303,4 +302,10 @@ input[type="number"]:focus {
 }
 #command-buttons input[type="button"]:active {
     transform: scale(0.95);
+}
+#command-buttons input[type="button"]:disabled {
+    background: transparent;
+    text-shadow: none;
+    box-shadow: 0 2px 5px -1px rgba(255,255,255,0.45) inset, 0 -2px 8px 1px rgba(0,0,0,0.3) inset, 0 1px 2px 1px rgba(0,0,0,0.35);
+    color: rgba(255,255,255,0.5);
 }
