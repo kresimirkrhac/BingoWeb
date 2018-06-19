@@ -1,12 +1,18 @@
-import { Component, OnInit, AfterContentInit, AfterContentChecked, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterContentInit, AfterContentChecked, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { BettingServiceService } from '../services/betting-service.service';
+// import 'rxjs/add/operator/first';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { Klinst } from '../models/klinst';
+import { Rparam } from '../models/rparam';
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-betting',
   templateUrl: './betting.component.html',
   styleUrls: ['./betting.component.css', './betting.layout.css']
 })
-export class BettingComponent implements OnInit, AfterContentInit, AfterContentChecked {
+export class BettingComponent implements OnInit, AfterContentInit, AfterContentChecked, OnDestroy {
   @ViewChild('colorButton') colorButton: ElementRef;
   @ViewChild('colorButtonInner') colorButtonInner: ElementRef;
   @ViewChild('rowButton') rowButton: ElementRef;
@@ -37,25 +43,73 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
   border: string[] = ["brd-red", "brd-yellow", "brd-blue", "brd-orange", "brd-green", "brd-rose", "brd-purple"];
   doResize: boolean;
   nrResize: number;
+  loginSub: Subscription;
+  poslSub: Subscription;
+  paramSub: Subscription;
+  nextDrawSub: Subscription
+  posl: Klinst;
+  param: Rparam;
+  drawNr: number;
+  drawTotSec: number;
+  drawMin: number;
+  drawSec: string;
+  drawTime: number;
 
   constructor(private bettingService: BettingServiceService) { }
 
   ngOnInit() {
+    this.bettingService.logout();
     for (var i = 0; i < 49; i++) {
       this.betButtons.push({ checked: false, color: this.colors[i % 7], border: this.border[i % 7], value: i + 1 });
     }
-    this.getToken();
-  }
+    this.loginSub = this.bettingService.login().subscribe(
+      () => {
 
-  async getToken() {
-    try {
-      await this.bettingService.getToken()
-        .then((data: any) => {
-          console.log(`data ${data}`);
-        });
-    } catch (err) {
-      console.log(`greska ${err}`);
-    }
+        this.poslSub = this.bettingService.getPosl().subscribe(
+          data => {
+            this.posl = data;
+            console.log(JSON.stringify(this.posl));
+            if (this.posl != undefined) {
+              this.paramSub = this.bettingService.getParam(this.posl.Sifposl).subscribe(
+                data => {
+                  this.param = data;
+                  console.log(JSON.stringify(this.param));
+                },
+                (error) => {
+                  console.log(`greska ${JSON.stringify(error)}`)
+                }
+              );
+            }
+          },
+          (error) => {
+            console.log(`greska ${JSON.stringify(error)}`)
+          }
+        );
+
+        this.nextDrawSub = this.bettingService.getNextDraw().subscribe(
+          data => {
+            if (data.ID) {
+              this.drawNr = data.ID;
+            }
+            if (data.Sekunde) {
+              this.drawTotSec = data.Sekunde;
+              this.drawTime = Date.now() + this.drawTotSec * 1000;
+              this.setMinSec();
+              this.showTime();
+            }
+            this.nextDrawSub.unsubscribe();
+          },
+          error => {
+            console.log(`greska ${JSON.stringify(error)}`);
+            this.nextDrawSub.unsubscribe();
+          }
+        );
+
+      },
+      error => {
+        console.log(`greska ${JSON.stringify(error)}`);
+      }
+    );
   }
 
   ngAfterContentInit() {
@@ -75,6 +129,89 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
       this.nrResize = 0;
     }
   }
+
+  ngOnDestroy() {
+    this.bettingService.logout();
+    this.loginSub.unsubscribe();
+    this.paramSub.unsubscribe();
+  }
+
+  setMinSec() {
+    this.drawMin = Math.floor(this.drawTotSec / 60);
+    if ((this.drawTotSec % 60) < 10) {
+      this.drawSec = `0${this.drawTotSec % 60}`;
+    }
+    else {
+      this.drawSec = `${this.drawTotSec % 60}`;
+    }
+  }
+  showTime() {
+    setTimeout(() => {
+      var now = Date.now();
+      this.drawTotSec = Math.floor((this.drawTime - now) / 1000);
+      if (this.drawTotSec > 0) {
+        this.setMinSec();
+        this.showTime();
+      }
+      else {
+        if (this.drawNr == 288) {
+          var day = this.drawNr / 1000;
+          this.drawNr = (day + 1) * 1000 + 1;
+        }
+        else {
+          this.drawNr += 1;
+        }
+        this.drawTime += 300000;
+        this.drawTotSec = 300;
+        this.setMinSec();
+        this.showTime();
+        setTimeout(() => {
+          this.nextDrawSub = this.bettingService.getNextDraw().subscribe(
+            data => {
+              if (data.ID) {
+                this.drawNr = data.ID;
+              }
+              if (data.Sekunde) {
+                this.drawTime = Date.now() + this.drawTotSec * 1000;
+                this.drawTotSec = data.Sekunde;
+                this.setMinSec();
+                this.showTime();
+              }
+              this.nextDrawSub.unsubscribe();
+            },
+            error => {
+              this.nextDrawSub.unsubscribe();
+              console.log(`greska ${JSON.stringify(error)}`);
+            }
+          );
+        }, Math.random()*50000)
+      }
+    },990);
+  }
+  // async getToken() {
+  //   try {
+  //     await this.bettingService.getToken()
+  //       .then((data: any) => {
+  //         console.log(`data ${JSON.stringify(data)}`);
+  //       });
+  //   } catch (err) {
+  //     console.log(`greska ${JSON.stringify(err)}`);
+  //   }
+  // }
+
+  // login() {
+  //   this.loginSub = this.bettingService.login()
+  //     // .first()
+  //     .subscribe(
+  //       data => {
+  //         console.log(`data ${JSON.stringify(data)}`);
+  //         // this.token = JSON.stringify(data);
+  //       },
+  //       error => {
+  //         console.log(`greska ${JSON.stringify(error)}`);
+  //       }
+  //     );
+  // }
 
   private stakePerCombIn() {
     this.oldValue = this.stakePerComb;
@@ -213,7 +350,8 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
   private canSave(): boolean {
     var canNotSave: boolean = true;
     if (this.nrNumbers < 6 || this.nrNumbers > 10) { canNotSave = true; }
-    else if (parseFloat(this.stakeAmount) < 1.00) { canNotSave = true; }
+    else if (parseFloat(this.stakeAmount) < this.param.Bminupl) { canNotSave = true; }
+    else if (parseFloat(this.stakeAmount) > this.param.Bmaxupl) { canNotSave = true; }
     else { canNotSave = false }
     return canNotSave;
   }
