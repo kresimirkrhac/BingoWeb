@@ -76,6 +76,10 @@
 #stake-content-ver input + label {
     font-size: 100%;
 }
+#modal-ticket .buttons {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
+}
 @media screen and (orientation: landscape ) {
     #main-container {
         position: relative;

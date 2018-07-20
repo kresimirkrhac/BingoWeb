@@ -6,14 +6,17 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http"
 import { AppComponent } from './app.component';
 import { BettingComponent } from './betting/betting.component';
 import { AnimationComponent } from './animation/animation.component';
-import { BettingServiceService } from './services/betting-service.service';
+import { BettingService } from './services/betting.service';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { ModalComponent } from './modal/modal.component';
+import { ModalService } from './services/modal.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     BettingComponent,
-    AnimationComponent
+    AnimationComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,8 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
     HttpClientModule
   ],
   providers: [
-    BettingServiceService,
+    BettingService,
+    ModalService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

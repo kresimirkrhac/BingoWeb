@@ -95,10 +95,11 @@ input[type="radio"], input[type="checkbox"] {
 #stake-buttons input:checked + label,
 #stake-content-ver input:checked + label {
     position: relative;
-    background: silver;
+    background: linear-gradient(180deg, #00AFFF 0%, rgb(0, 104, 153) 100%);;
     color: white;
     border-radius: 20%;
-    text-shadow: -1px 2px 5px rgba(0,0,0,0.5), 1px 2px 5px rgba(0,0,0,0.5);
+    /* color: #0c2f55; */
+    /* text-shadow: -1px 2px 5px rgba(0,0,0,0.5), 1px 2px 5px rgba(0,0,0,0.5); */
     box-shadow: 0 -2px 5px 0px rgba(0,0,0,0.5) inset;
 }
 #pick-buttons input:checked + label:after,
@@ -110,9 +111,9 @@ input[type="radio"], input[type="checkbox"] {
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 20%;
-    background-image: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,0.95) 10%, transparent 12%);
-    box-shadow: 0 3px 3px 0px rgba(0,0,0,0.75);
+    border-radius: 25%;
+    background-image: linear-gradient(#00AFFF, rgba(255,255,255,1) 8%, rgba(255,255,255,1) 12%, transparent 12%);
+    box-shadow: 0 3px 0px 0px rgba(0,0,0,0.9);
 }
 #pick-buttons input + label:active,
 #stake-buttons input + label:active,
@@ -218,7 +219,7 @@ input[type="number"]:focus {
 	border-radius: 50%;
     font-family: Arial Black, Helvetica, sans-serif;
 	text-align: center;
-    text-shadow: 0 2px 1px rgba(0,0,0,0.5);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
     border: none;
 }
 .bet-button-inner:after {
@@ -286,6 +287,7 @@ input[type="number"]:focus {
 .row-button-inner:active {
     transform: scale(0.95);
 }
+#modal-ticket button,
 #command-buttons input[type="button"] {
     position: relative;
     margin: 0.75vw 0 0.5vw 0;
@@ -300,6 +302,7 @@ input[type="number"]:focus {
     font-weight: 600;
     box-shadow: 0 2px 5px -1px rgba(255,255,255,0.85) inset, 0 -2px 8px 1px rgba(0,0,0,0.7) inset, 0 1px 2px 1px rgba(0,0,0,0.35);
 }
+#modal-ticket button:active,
 #command-buttons input[type="button"]:active {
     transform: scale(0.95);
 }
@@ -308,4 +311,73 @@ input[type="number"]:focus {
     text-shadow: none;
     box-shadow: 0 2px 5px -1px rgba(255,255,255,0.45) inset, 0 -2px 8px 1px rgba(0,0,0,0.3) inset, 0 1px 2px 1px rgba(0,0,0,0.35);
     color: rgba(255,255,255,0.5);
+}
+
+#modal-error {
+    color: white;
+}
+#modal-error p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+#modal-ticket .align-center.buttons {
+    height: 2.5rem;
+}
+#modal-ticket .align-center.buttons > button {
+    margin: 0;
+}
+.row2 {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+}
+.row3 {
+    display: grid;
+    grid-template-columns: 3fr 2fr 1.5fr;
+}
+.bor-top {
+    border-top: 1px solid black;
+}
+.padbot3px {
+    padding-bottom: 3px;
+}
+.align-right {
+    text-align: right; 
+}
+.align-center {
+    text-align: center;
+}
+.bold {
+    font-weight: bold;
+}
+.spheres {
+    display: grid;
+    grid-auto-flow: column;
+    justify-items: center;
+}
+.sphere {
+    border: 1px solid black;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 125%;
+    margin: 10px auto;
+    line-height: 30px;
+    height: 34px;
+    width: 34px;
+}
+.big {
+    font-size: 125%;
+}
+.small {
+    font-size: 75%;
+}
+@media print {
+    :host {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    #body {
+        display: none;
+    }
+    button {
+        display: none;
+    }
 }

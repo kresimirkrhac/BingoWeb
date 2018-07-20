@@ -1,26 +1,15 @@
-<ng-template #btnChecked let-data="data">
-  <button 
-    (click)="betButtonChecked($event)"
-    class="{{ data.color }} bet-button-inner"
-    [style.height.px]="butSize"
-    [style.width.px]="butSize"
-    [style.lineHeight.px]="butSize*.9"
-    [style.marginTop.px]="butMarginTop"
-    [style.marginLeft.px]="butMarginLeft">{{ data.value }}
-  </button>
-</ng-template>
-<ng-template #btnNotChecked let-data="data">
-  <button
-    (click)="betButtonChecked($event)"
-    class="{{ data.border }} bet-button-transparent"
-    [style.height.px]="butSize"
-    [style.width.px]="butSize"
-    [style.lineHeight.px]="butSize*.9"
-    [style.marginTop.px]="butMarginTop"
-    [style.marginLeft.px]="butMarginLeft">{{ data.value }}
-  </button>
-</ng-template>
+<div id="body">
 <div id="main-container" (window:resize)="Resize()">
+  <ng-template #btnChecked let-data="data">
+    <button (click)="betButtonChecked($event)" class="{{ data.color }} bet-button-inner" [style.height.px]="butSize" [style.width.px]="butSize"
+      [style.lineHeight.px]="butSize*.9" [style.marginTop.px]="butMarginTop" [style.marginLeft.px]="butMarginLeft">{{ data.value }}
+    </button>
+  </ng-template>
+  <ng-template #btnNotChecked let-data="data">
+    <button (click)="betButtonChecked($event)" class="{{ data.border }} bet-button-transparent" [style.height.px]="butSize" [style.width.px]="butSize"
+      [style.lineHeight.px]="butSize*.9" [style.marginTop.px]="butMarginTop" [style.marginLeft.px]="butMarginLeft">{{ data.value }}
+    </button>
+  </ng-template>
   <div id="betting-buttons">
     <div></div>
     <div #colorButton class="color-button">
@@ -48,7 +37,7 @@
       <button #rowButtonInner (click)="rowButtonChecked(0,$event)" class="row-button-inner" [style.marginTop.px]="rowMarginTop">➤</button>
     </div>
     <div #betButton class="bet-button">
-        <ng-container [ngTemplateOutlet]='betButtons[0].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[0]}"></ng-container>
+      <ng-container [ngTemplateOutlet]='betButtons[0].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[0]}"></ng-container>
     </div>
     <div class="bet-button">
       <ng-container [ngTemplateOutlet]='betButtons[1].checked ? btnChecked : btnNotChecked' [ngTemplateOutletContext]="{data:betButtons[1]}"></ng-container>
@@ -243,31 +232,36 @@
       <label>{{stakeBtnText}}</label>
       <div id="stake-buttons">
         <div class="three-columns">
-          <input type="radio" value="0.1" name="stake-button" id="stk01" [checked]="stakePerComb === '0.1'">
+          <input type="radio" value="0.1" name="stake-button" id="stk01" [checked]="stakePerComb === '0.10'">
           <label for="stk01" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">0.1</label>
-          <input type="radio" value="0.5" name="stake-button" id="stk05" [checked]="stakePerComb === '0.5'">
+          <input type="radio" value="0.5" name="stake-button" id="stk05" [checked]="stakePerComb === '0.50'">
           <label for="stk05" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">0.5</label>
         </div>
         <div class="three-columns">
-          <input type="radio" value="1.0" name="stake-button" id="stk10" [checked]="stakePerComb === '1.0'">
+          <input type="radio" value="1.0" name="stake-button" id="stk10" [checked]="stakePerComb === '1.00'">
           <label for="stk10" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">1.0</label>
-          <input type="radio" value="2.0" name="stake-button" id="stk20" [checked]="stakePerComb === '2.0'">
+          <input type="radio" value="2.0" name="stake-button" id="stk20" [checked]="stakePerComb === '2.00'">
           <label for="stk20" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">2.0</label>
-          <div #horStake><input type="text" size="1" [(ngModel)]="stakePerComb" [ngStyle]="{'width.px': horMaxWidth}" (focus)="stakePerCombIn()" (focusout)="stakePerCombOut()"></div>
+          <div #horStake>
+            <input type="text" size="1" [(ngModel)]="stakePerComb" [ngStyle]="{'width.px': horMaxWidth}" (focus)="stakePerCombIn()" (focusout)="stakePerCombOut()">
+          </div>
         </div>
       </div>
     </div>
     <div id="stake-content-ver">
       <label>{{stakeBtnText}}</label>
-      <input type="radio" value="0.1" name="stake-button" id="stkh01" [checked]="stakePerComb === '0.1'">
+      <input type="radio" value="0.1" name="stake-button" id="stkh01" [checked]="stakePerComb === '0.10'">
       <label for="stkh01" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">0.1</label>
-      <input type="radio" value="0.5" name="stake-button" id="stkh05" [checked]="stakePerComb === '0.5'">
+      <input type="radio" value="0.5" name="stake-button" id="stkh05" [checked]="stakePerComb === '0.50'">
       <label for="stkh05" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">0.5</label>
-      <input type="radio" value="1.0" name="stake-button" id="stkh10" [checked]="stakePerComb === '1.0'">
+      <input type="radio" value="1.0" name="stake-button" id="stkh10" [checked]="stakePerComb === '1.00'">
       <label for="stkh10" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">1.0</label>
-      <input type="radio" value="2.0" name="stake-button" id="stkh20" [checked]="stakePerComb === '2.0'">
+      <input type="radio" value="2.0" name="stake-button" id="stkh20" [checked]="stakePerComb === '2.00'">
       <label for="stkh20" (click)="stakeClicked($event)" (keydown)="stakeKeyPressed($event)" role="button" tabindex="0">2.0</label>
-      <div #verStake><input type="number" size="1" step="0.01" [(ngModel)]="stakePerComb" [ngStyle]="{'width.px': verMaxWidth}" (focus)="stakePerCombIn()" (focusout)="stakePerCombOut()"></div>
+      <div #verStake>
+        <input type="number" size="1" step="0.01" [(ngModel)]="stakePerComb" [ngStyle]="{'width.px': verMaxWidth}" (focus)="stakePerCombIn()"
+          (focusout)="stakePerCombOut()">
+      </div>
     </div>
   </div>
   <div id="stake-info">
@@ -278,7 +272,77 @@
     <div></div>
     <input type="button" value="{{cancelText}}" (click)="cancel($event)">
     <div></div>
-    <input type="button" value="{{saveText}}" [disabled]="canSave()">
+    <input type="button" value="{{saveText}}" [disabled]="disabled" (click)="save($event)">
     <div></div>
   </div>
 </div>
+</div>
+<jw-modal id="modal-ticket">
+  <div class="align-center">
+    <img src="./assets/superbet_logo150dpi.bmp" alt="Logo" style="width: 250px; height: auto;">
+  </div>
+  <div class="align-center bold padbot3px big">{{officeName}}</div>
+  <div class="row2 bor-top">
+    <div>{{bettingDate}}</div>
+    <div class="align-right">{{bettingTime}}</div>
+  </div>
+  <div class="row2">
+    <div>{{ticketNrText}}</div>
+    <div class="align-right bold">{{ticketNr}}</div>
+  </div>
+  <div class="row2">
+    <div>{{pinText}}</div>
+    <div class="align-right padbot3px">{{pin}}</div>
+  </div>
+  <div class="row2 bor-top">
+    <div>{{betType}}</div>
+    <div class="align-right">{{gameText}}</div>
+  </div>
+  <div class="align-center bor-top padbot3px">{{extractionText}} {{offerNr}} {{atText}} {{serDrawTime}}</div>
+  <div class="bor-top">
+    <div class="spheres">
+      <div class="sphere bold" *ngFor="let number of numbers">{{number}}</div>
+    </div>
+  </div>
+  <div class="align-center padbot3px">
+    {{betComb}} {{kombText}} x {{stakePerComb}} = {{stakeAmount}}
+  </div>
+  <div class="row3 align-right bor-top">
+    <div>{{stakeText}}</div>
+    <div>{{stakePerComb}}</div>
+  </div>
+  <div class="row3 align-right padbot3px">
+    <div>{{totalStakeText}}</div>
+    <div>{{stakeAmount}}</div>
+  </div>
+  <div class="align-center small bor-top">
+    {{footerText1}}
+  </div>
+  <div class="align-center small">
+    {{footerText2}}
+  </div>
+  <div class="align-center small">
+    {{footerText3}}
+  </div>
+  <div class="align-center small">
+    {{footerText4}}
+  </div>
+  <br>
+  <div class="align-center buttons">
+    <div></div>
+    <button (click)="closeModal('modal-ticket',$event);">{{closeText}}</button>
+    <div></div>
+    <button (click)="printModal('modal-ticket',$event)">{{printText}}</button>
+    <div></div>
+  </div>
+</jw-modal>
+<jw-modal id="modal-error" backgroundColor="#922a2a" width="600px">
+  <p class="align-center">{{errorText}}</p>
+  <div class="align-center buttons">
+      <div></div>
+      <div></div>
+      <button (click)="closeModal('modal-error',$event);">{{closeText}}</button>
+      <div></div>
+      <div></div>
+    </div>
+</jw-modal>

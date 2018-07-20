@@ -1,0 +1,28 @@
+export class Bticket {
+	Sifposl: number = null;
+	Godina: number = null;
+	Tjedan: number = null;
+	Osoprim: number = null;
+	Brtik: number = null;
+	Datprim: Date = null;
+	Osoispl: number = null;
+	Datispl: Date = null;
+	Osostrn: number = null;
+	Datstrn: Date = null;
+	Ulog: number = null;
+	Mtros: number = null;
+	Uplata: number = null;
+	Evdobsp: number = null;
+	Evporez: number = null;
+	Evdobbezp: number = null;
+	Isplaceno: number = null;
+	Datpromj: Date = null;
+	Osopromj: number = null;
+	Indik: string = '';
+	Pin: number = null;
+	Brpon: number = null;
+	Datodig: Date = null;
+	Krugova: number = null;
+	Odigrano: number[][] = null;
+	Jack1: number = null;
+}

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { BettingServiceService } from '../services/betting-service.service';
+import { BettingService } from '../services/betting.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-    constructor(private bettingService: BettingServiceService) { }
+    constructor(private bettingService: BettingService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // add authorization header with jwt token if available
         // let currentUser = JSON.parse(localStorage.getItem('currentUser'));
