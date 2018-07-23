@@ -2,7 +2,7 @@
 <div id="main-container" (window:resize)="Resize()">
   <ng-template #btnChecked let-data="data">
     <button (click)="betButtonChecked($event)" class="{{ data.color }} bet-button-inner" [style.height.px]="butSize" [style.width.px]="butSize"
-      [style.lineHeight.px]="butSize*.9" [style.marginTop.px]="butMarginTop" [style.marginLeft.px]="butMarginLeft">{{ data.value }}
+      [style.lineHeight.px]="butSize" [style.marginTop.px]="butMarginTop" [style.marginLeft.px]="butMarginLeft">{{ data.value }}
     </button>
   </ng-template>
   <ng-template #btnNotChecked let-data="data">
@@ -11,7 +11,9 @@
     </button>
   </ng-template>
   <div id="betting-buttons">
-    <div></div>
+    <div class="row-button">
+      <a routerLink="/ticket-list" [style.marginTop.px]="colMarginTop" class="row-button-inner">&#9776;</a>
+    </div>
     <div #colorButton class="color-button">
       <button #colorButtonInner (click)="colorButtonChecked(0,$event)" class="color-button-inner red" [style.marginTop.px]="colMarginTop"></button>
     </div>
@@ -336,7 +338,7 @@
     <div></div>
   </div>
 </jw-modal>
-<jw-modal id="modal-error" backgroundColor="#922a2a" width="600px">
+<jw-modal id="modal-error" backgroundColor="#922a2a" width="600">
   <p class="align-center">{{errorText}}</p>
   <div class="align-center buttons">
       <div></div>

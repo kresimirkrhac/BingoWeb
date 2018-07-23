@@ -16,21 +16,23 @@ import { tick } from '@angular/core/testing';
 
 @Injectable()
 export class BettingService {
+  // private prodUrl: string = "http://ds9a.clab.hr:8443/nodeapi";
+  //prodUrl: string = "http://192.168.1.101:8443/nodeapi";
   // private prodUrl: string = "https://clabck.dyndns.org:8443/nodeapi";
-  private prodUrl: string = "http://ds9a.clab.hr:8443/nodeapi";
+  // private prodUrl: string = "http://clabck.dyndns.org:8443/nodeapi";
+  private prodUrl: string = "http://192.168.1.56:8443/nodeapi";
 
   // token: string = "";
-  //prodUrl: string = "http://192.168.1.101:8443/nodeapi";
-  // actionUrl: string = "http://localhost:5013";
   username: string = "Pero";
   encryptedPassword: string = "A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=";
-  osobaID: number;
+  // poslID: number = 0;
+  // osobaID: number = 0;
 
   constructor(private http: HttpClient) { }
 
   // async getToken(): Promise<any> {
   //   return new Promise<any>((resolve, reject) => {
-  //     this.http.post<any>(this.actionUrl + '/token', {Username: this.username, Password: this.encryptedPassword}, httpOptions)
+  //     this.http.post<any>(this.prodUrl + '/token', {Username: this.username, Password: this.encryptedPassword}, httpOptions)
   //       .toPromise()
   //       .then(
   //         (res => { return resolve(res); }),
@@ -46,11 +48,13 @@ export class BettingService {
           // login successful if there's a jwt token in the response
           if (user && user.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('token', user.token);
+            sessionStorage.setItem('token', user.token);
+            // localStorage.setItem('token', user.token);
             // this.token = user.token;
             var person = this.decodeToken(user.token);
             if (person != undefined) {
-              this.osobaID = person['osobaid'];
+              // this.osobaID = person['osobaid'];
+              sessionStorage.setItem('osoba',person['osobaid']);
             }
           }
           return user;
@@ -65,23 +69,43 @@ export class BettingService {
 
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+    // localStorage.removeItem('token');
     // this.token = "";
   }
 
+  getPoslID() {
+    return sessionStorage.getItem('posl');
+  }
+
   getOsobaID() {
-    return this.osobaID;
+    return sessionStorage.getItem('osoba');
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    return sessionStorage.getItem('token');
+    // return localStorage.getItem('token');
     // return this.token;
+  }
+
+  setPosl(): Observable<Klinst> {
+    return this.http.get<Klinst>(this.prodUrl + '/klinst?Guid=e0b9a40a-1900-11e7-93ae-92361f002671').pipe(
+      tap(data => {
+        if (data) {
+          sessionStorage.setItem('poslAll',JSON.stringify(data));
+          return data;
+        }
+      }),
+      catchError( this.handleError<Klinst>('setPosl') )
+    );
   }
 
   getPosl(): Observable<Klinst> {
     return this.http.get<Klinst>(this.prodUrl + '/klinst?Guid=e0b9a40a-1900-11e7-93ae-92361f002671').pipe(
       tap(data => {
         if (data) {
+          // this.poslID = data.Sifposl;
+          sessionStorage.setItem('posl',data.Sifposl.toString());
           return data;
         }
       }),
@@ -112,7 +136,7 @@ export class BettingService {
     );
   }
 
-  saveTicket(ticket: Bticket) {
+  saveTicket(ticket: Bticket): Observable<Bticket> {
       return this.http.post<Bticket>(this.prodUrl + '/Bticket', { 
         Sifposl:  ticket.Sifposl,
         Godina:   ticket.Godina,
@@ -132,6 +156,45 @@ export class BettingService {
         }),
         catchError(this.handleError<Bticket>('saveTicket'))
       );
+  }
+
+  getTicketCount(): Observable<number> {
+    let posl = this.getPoslID();
+    let osoba = this.getOsobaID();
+    return this.http.get<any>(this.prodUrl + `/bticket/osocount?Sifposl=${posl}&Osoprim=${osoba}`).pipe(
+      tap(data => {
+        if (data) {
+          var date = new Date();          console.log(`stigli podaci ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} ${JSON.stringify(data)}`);
+          return data;
+        }
+      }),
+      catchError( this.handleError<any>('getTicketCount') )
+    );
+  }
+  getTickets(ind: number): Observable<Bticket[]> {
+    let ticket: Bticket[] = [];
+    let odigrano: number[][];
+    odigrano = [];
+    odigrano.push([1,2,3,4,5,6]);
+    odigrano.push([7,8,9,10,11,12,13,14]);
+
+    ticket.push({ Sifposl: 999, Godina: 18, Tjedan: 28, Osoprim: 123, Brtik: 121, 
+      Datprim: new Date(), Osoispl: 0, Datispl: new Date(), Osostrn: 0,
+      Datstrn: new Date(), Ulog: 1.9, Mtros: 0.1, Uplata: 2.0, 
+      Evdobsp: 12.0, Evporez: 0.0, Evdobbezp: 12.0, Isplaceno: 0.0,
+      Datpromj: new Date(), Osopromj: 123, Indik: 'N', Pin: 1234,
+      Brpon: 123122, Datodig: new Date(), Krugova: 1,
+      Odigrano: odigrano, Jack1: 0 }
+    );
+    ticket.push({ Sifposl: 999, Godina: 18, Tjedan: 28, Osoprim: 123, Brtik: 122, 
+      Datprim: new Date(), Osoispl: 0, Datispl: new Date(), Osostrn: 0,
+      Datstrn: new Date(), Ulog: 2.8, Mtros: 0.2, Uplata: 3.0, 
+      Evdobsp: 14.0, Evporez: 0.0, Evdobbezp: 14.0, Isplaceno: 0.0,
+      Datpromj: new Date(), Osopromj: 123, Indik: 'N', Pin: 1234,
+      Brpon: 123122, Datodig: new Date(), Krugova: 1,
+      Odigrano: odigrano, Jack1: 0 }
+    );
+    return of(ticket);
   }
 
   /**

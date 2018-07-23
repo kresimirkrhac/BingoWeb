@@ -1,0 +1,13 @@
+<div *ngFor="let ticket of tickets; let i = index">
+    {{i+1}}. {{ticket.Sifposl}}{{ticket.Godina}}{{ticket.Tjedan}}{{ticket.Osoprim}}{{ticket.Brtik}}
+</div>
+<jw-modal id="modal-error" backgroundColor="#922a2a" width="600">
+    <p class="align-center">{{errorText}}</p>
+    <div class="align-center buttons">
+        <div></div>
+        <div></div>
+        <button (click)="closeModal('modal-error',$event);">{{closeText}}</button>
+        <div></div>
+        <div></div>
+      </div>
+  </jw-modal>

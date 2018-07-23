@@ -10,6 +10,7 @@ export class JwtInterceptor implements HttpInterceptor {
         // add authorization header with jwt token if available
         // let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         let token = this.bettingService.getToken();
+        
         if (token && token != "") {
             request = request.clone({
                 setHeaders: { 

@@ -221,6 +221,7 @@ input[type="number"]:focus {
 	text-align: center;
     text-shadow: 0 1px 2px rgba(0,0,0,0.5);
     border: none;
+    transform: scale(1.05);
 }
 .bet-button-inner:after {
     content: "";
@@ -243,7 +244,7 @@ input[type="number"]:focus {
 	text-align: center;
     text-shadow: 0 2px 1px rgba(0,0,0,0.5);
     background: rgba(26, 102, 183, 0.5);
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.6);
 }
 .color-button-inner {
     position: relative;
@@ -271,6 +272,7 @@ input[type="number"]:focus {
     box-shadow: 0 2px 5px -2px rgba(255,255,255,0.5) inset, 0 1px 2px 1px rgba(0,0,0,0.4);
     position: relative;
     border: none;
+    text-align: center;
 }
 .row-button-inner:after {
     content: "";

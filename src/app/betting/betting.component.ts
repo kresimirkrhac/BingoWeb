@@ -12,7 +12,7 @@ import { ModalService } from '../services/modal.service';
   templateUrl: './betting.component.html',
   styleUrls: ['./betting.component.css', './betting.layout.css']
 })
-export class BettingComponent implements OnInit, AfterContentInit, AfterContentChecked, OnDestroy {
+export class BettingComponent implements OnInit, AfterContentInit, AfterContentChecked /*, OnDestroy */ {
   @ViewChild('colorButton') colorButton: ElementRef;
   @ViewChild('colorButtonInner') colorButtonInner: ElementRef;
   @ViewChild('rowButton') rowButton: ElementRef;
@@ -47,10 +47,6 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
   border: string[] = ["brd-red", "brd-yellow", "brd-blue", "brd-orange", "brd-green", "brd-rose", "brd-purple"];
   doResize: boolean;
   nrResize: number;
-  loginSub: Subscription;
-  dataSub: Subscription;
-  data1Sub: Subscription;
-  nextDrawSub: Subscription
   osobaID: number;
   posl: Klinst;
   param: Rparam;
@@ -89,54 +85,14 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
 
   ngOnInit() {
     this.ticket = new Bticket();
-    this.bettingService.logout();
     for (var i = 0; i < 49; i++) {
       this.betButtons.push({ checked: false, color: this.colors[i % 7], border: this.border[i % 7], value: i + 1 });
     }
-    this.loginSub = this.bettingService.login().subscribe(
-      () => {
-        
-        this.osobaID = this.bettingService.getOsobaID();
-
-        this.dataSub = this.bettingService.getPosl().subscribe(
-          data => {
-            this.posl = data;
-            // console.log(JSON.stringify(this.posl));
-
-            if (this.posl != undefined) {
-              this.officeName = this.posl.Poslovnica;
-              this.data1Sub = this.bettingService.getParam(this.posl.Sifposl).subscribe(
-                data => {
-                  this.param = data[0];
-                  this.data1Sub.unsubscribe();
-                  // console.log(JSON.stringify(this.param));
-                },
-                (error) => {
-                  this.data1Sub.unsubscribe();
-                  this.errorText = error;
-                  this.openModal('modal-error');
-                }
-              );
-            }
-            this.dataSub.unsubscribe();
-          },
-          (error) => {
-            this.dataSub.unsubscribe();
-            this.errorText = error;
-            this.openModal('modal-error');
-          }
-        );
-        this.nextDraw();
-        this.loginSub.unsubscribe();
-      },
-      error => {
-        this.loginSub.unsubscribe();
-        this.errorText = error;
-        this.openModal('modal-error');
-      }
-    );
+    this.setOsoba();
+    this.setPosl();
+    this.setParam();
+    this.nextDraw();
   }
-
 
   ngAfterContentInit() {
     this.doResize = true;
@@ -156,11 +112,11 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
     }
   }
 
-  ngOnDestroy() {
-    this.bettingService.logout();
-  }
+  // ngOnDestroy() {
+  //   this.bettingService.logout();
+  // }
 
-  setMinSec() {
+  private setMinSec() {
     this.drawMin = Math.floor(this.drawTotSec / 60);
     if ((this.drawTotSec % 60) < 10) {
       this.drawSec = `0${this.drawTotSec % 60}`;
@@ -170,7 +126,8 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
     }
     this.canSave();
   }
-  showTime() {
+
+  private showTime() {
     setTimeout(() => {
       var now = Date.now();
       this.drawTotSec = Math.floor((this.drawTime - now) / 1000);
@@ -197,30 +154,6 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
       }
     },950);
   }
-  // async getToken() {
-  //   try {
-  //     await this.bettingService.getToken()
-  //       .then((data: any) => {
-  //         console.log(`data ${JSON.stringify(data)}`);
-  //       });
-  //   } catch (err) {
-  //     console.log(`greska ${JSON.stringify(err)}`);
-  //   }
-  // }
-
-  // login() {
-  //   this.loginSub = this.bettingService.login()
-  //     // .first()
-  //     .subscribe(
-  //       data => {
-  //         console.log(`data ${JSON.stringify(data)}`);
-  //         // this.token = JSON.stringify(data);
-  //       },
-  //       error => {
-  //         console.log(`greska ${JSON.stringify(error)}`);
-  //       }
-  //     );
-  // }
 
   private stakePerCombIn() {
     this.oldValue = this.stakePerComb;
@@ -241,7 +174,7 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
     }
   }
 
-  betButtonChecked(event: any) {
+  private betButtonChecked(event: any) {
     var index = event.path["0"].innerHTML;
     if (this.betButtons[index - 1].checked == false && this.nrNumbers == 10) {
       return;
@@ -256,17 +189,7 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
     this.clacStakeAmount();
   }
 
-  // getNrNumbers(): number {
-  //   var nrChecked = 0;
-  //   for (var i = 0; i < this.betButtons.length; i++) {
-  //     if (this.betButtons[i].checked == true) {
-  //       nrChecked++;
-  //     }
-  //   }
-  //   return nrChecked;
-  // }
-
-  colorButtonChecked(index: number, event: any) {
+  private colorButtonChecked(index: number, event: any) {
     for (var i = 0; i < this.betButtons.length; i++) {
       if ((i % 7) == index) {
         this.betButtons[i].checked = true;
@@ -280,7 +203,7 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
     event.target.style.outline = "none";
   }
 
-  rowButtonChecked(index: number, event: any) {
+  private rowButtonChecked(index: number, event: any) {
     for (var i = 0; i < this.betButtons.length; i++) {
       if (i >= index * 7 && i < (index + 1) * 7) {
         this.betButtons[i].checked = true;
@@ -294,7 +217,7 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
     event.target.style.outline = "none";
   }
 
-  autoPick(event: any) {
+  private autoPick(event: any) {
     var nrToPick = event.path["0"].innerHTML;
     var nrPicked = 0;
     var picked: number;
@@ -315,7 +238,7 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
     event.target.style.outline = "none";
   }
 
-  stakeClicked(event: any) {
+  private stakeClicked(event: any) {
     this.stakePerComb = event.path["0"].innerHTML;
     this.stakePerComb += '0';
     this.clacStakeAmount();
@@ -363,7 +286,7 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
     this.disabled = true;
   }
 
-  canSave() {
+  private canSave() {
     var canNotSave: boolean = true;
     if (this.nrNumbers < 6 || this.nrNumbers > 10) { canNotSave = true; }
     else if (parseFloat(this.stakeAmount) < this.param.Bminupl) { canNotSave = true; }
@@ -402,7 +325,7 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
       }
     }
     this.ticket.Odigrano.push(odigrano);
-    this.dataSub = this.bettingService.saveTicket(this.ticket).subscribe(
+    let dataSub = this.bettingService.saveTicket(this.ticket).subscribe(
       data => {
         console.log(data);
         this.ticket = data;
@@ -415,37 +338,92 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
           this.pin = `${(this.ticket.Pin).toString().padStart(4,"0")}`;
           this.offerNr = `${(this.ticket.Brpon).toString().padStart(6,"0")}`
           this.openModal('modal-ticket');
-          this.dataSub.unsubscribe();
+          dataSub.unsubscribe();
         }
       },
       error => {
-        this.dataSub.unsubscribe();
+        dataSub.unsubscribe();
         this.errorText = error;
         this.openModal('modal-error');
       });
   }
 
-  private nextDraw() {
-    this.nextDrawSub = this.bettingService.getNextDraw().subscribe(data => {
-      // console.log(data);
-      if (data) {
-        this.drawNr = data.ID;
-        this.serDrawTime = data.Vrijeme;
-      }
-      if (data.Sekunde) {
-        this.drawTotSec = data.Sekunde;
-        this.drawTime = Date.now() + this.drawTotSec * 1000;
-        this.setMinSec();
-        this.showTime();
-        // console.log(`vrijeme izvlacenja ${new Date(this.drawTime).getHours()}:${new Date(this.drawTime).getMinutes()}:${new Date(this.drawTime).getSeconds()}`);
-      }
-      this.nextDrawSub.unsubscribe();
-    }, error => {
-      this.nextDrawSub.unsubscribe();
-      this.errorText = error;
-      this.openModal('modal-error');
-    });
+  private setOsoba() {
+    if (this.bettingService.getOsobaID().length > 0 ) {
+      this.osobaID = parseInt(this.bettingService.getOsobaID());  
+    }
+    else {
+      setTimeout(() => {
+          this.setOsoba();
+      }, 500);
+    }
   }
+
+  private setPosl() {
+    if (this.bettingService.getToken().length > 0) {
+      let poslSub: Subscription = this.bettingService.getPosl().subscribe(data => {
+        this.posl = data;
+        if (this.posl != undefined) {
+          this.officeName = this.posl.Poslovnica;
+        }
+        poslSub.unsubscribe();
+      }, (error) => {
+        poslSub.unsubscribe();
+        this.errorText = error;
+        this.openModal('modal-error');
+      });
+    }
+    else {
+      setTimeout(() => {
+        this.setPosl();
+      }, 500);
+    }
+  }
+  private setParam() {
+    setTimeout(() => {
+      if (this.bettingService.getToken().length > 0 && this.posl != undefined) {
+        let paramSub = this.bettingService.getParam(this.posl.Sifposl).subscribe(data => {
+          this.param = data[0];
+          paramSub.unsubscribe();
+        }, (error) => {
+          paramSub.unsubscribe();
+          this.errorText = error;
+          this.openModal('modal-error');
+        });
+      }
+      else {
+        this.setParam();
+      }
+    }, 50);
+  }
+
+  private nextDraw() {
+    setTimeout(() => {
+      if (this.bettingService.getToken().length > 0) {
+        let nextDrawSub = this.bettingService.getNextDraw().subscribe(data => {
+          if (data) {
+            this.drawNr = data.ID;
+            this.serDrawTime = data.Vrijeme;
+          }
+          if (data.Sekunde) {
+            this.drawTotSec = data.Sekunde;
+            this.drawTime = Date.now() + this.drawTotSec * 1000;
+            this.setMinSec();
+            this.showTime();
+          }
+          nextDrawSub.unsubscribe();
+        }, error => {
+          nextDrawSub.unsubscribe();
+          this.errorText = error;
+          this.openModal('modal-error');
+        });
+      }
+      else {
+        this.nextDraw();
+      }
+    }, 50);
+  }
+
   private getWeek( d: Date ): number { 
 
     // Create a copy of this date object  
@@ -505,22 +483,17 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
       this.rowMarginTop = (this.rowButton.nativeElement.clientHeight - this.rowButtonInner.nativeElement.clientHeight) / 2;
     }
   }
-  openModal(id: string) {
+  private openModal(id: string) {
     this.modalService.open(id);
   }
 
-  closeModal(id: string, event: any) {
+  private closeModal(id: string, event: any) {
     this.modalService.close(id);
     this.cancel(event);
   }
  
-  printModal(divName,event: any){
-  //   this.closeModal('modal-ticket',event);
-  //   var printContents = document.getElementById(divName).innerHTML;
-  //   var originalContents = document.body.innerHTML;
-  //   document.body.innerHTML = printContents;
+  private printModal(divName,event: any){
     window.print();
-  //   document.body.innerHTML = originalContents;
   }
 
   private pickKeyPressed(event: any) {
@@ -540,4 +513,38 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
       this.stakeClicked(event);
     }
   }
+  // async getToken() {
+  //   try {
+  //     await this.bettingService.getToken()
+  //       .then((data: any) => {
+  //         console.log(`data ${JSON.stringify(data)}`);
+  //       });
+  //   } catch (err) {
+  //     console.log(`greska ${JSON.stringify(err)}`);
+  //   }
+  // }
+
+  // login() {
+  //   this.loginSub = this.bettingService.login()
+  //     // .first()
+  //     .subscribe(
+  //       data => {
+  //         console.log(`data ${JSON.stringify(data)}`);
+  //         // this.token = JSON.stringify(data);
+  //       },
+  //       error => {
+  //         console.log(`greska ${JSON.stringify(error)}`);
+  //       }
+  //     );
+  // }
+
+  // getNrNumbers(): number {
+  //   var nrChecked = 0;
+  //   for (var i = 0; i < this.betButtons.length; i++) {
+  //     if (this.betButtons[i].checked == true) {
+  //       nrChecked++;
+  //     }
+  //   }
+  //   return nrChecked;
+  // }
 }
