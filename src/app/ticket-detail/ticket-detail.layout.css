@@ -1,0 +1,25 @@
+#main-container {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+}
+.card-header {
+    display: grid;
+    grid-template-columns: 4fr 6fr .7fr;
+}
+.row {
+    display: grid;
+    grid-template-columns: minmax(25px,0.25fr) minmax(200px,2fr) repeat(2,minmax(100px,1fr)) minmax(25px,0.25fr);
+}
+.row1 {
+    display: grid;
+    grid-template-columns: minmax(25px,0.25fr) minmax(400px,4fr) minmax(25px,0.25fr);
+}
+.row2 {
+    display: grid;
+    grid-template-columns: repeat(35,minmax(20px,1fr));
+}
+.date-time {
+    display: grid;
+    grid-template-rows: repeat(2,minmax(150px,1fr));
+}

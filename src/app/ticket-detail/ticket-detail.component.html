@@ -1,0 +1,104 @@
+<div id="main-container" (click)="onClose()">
+  <div class="card">
+      <div class="card-header">
+          <div class="header-title" [ngStyle]="setStyle()">{{ticketNr}}</div>
+          <div></div>
+          <div class="stat G" *ngIf="status == 'G'">&#10006;</div>
+          <div class="stat I" *ngIf="status == 'I'">&#8364;</div>
+          <div class="stat D" *ngIf="status == 'D'">&#10004;</div>
+          <div class="stat N" *ngIf="status == 'N'">&#8987;</div>
+          <div class="stat S" *ngIf="status == 'S'">S</div>
+      </div>
+      <div class="card-body" [ngClass]="{
+        'red':status[0] === 'G',
+        'green':status[0] === 'I',
+        'darkgreen':status[0] === 'D',
+        'blue':status[0] === 'N',
+        'brown':status[0] === 'S'}">
+          <div class="row">
+              <div></div>
+              <fieldset>
+                  <legend>{{saveTimeText}}</legend>
+                  <div class="text">{{bettingDate}} {{bettingTime}}</div>
+              </fieldset>
+              <fieldset>
+                  <legend>{{stakeText}}</legend>
+                  <div class="number">{{stake}}</div>
+              </fieldset>
+              <fieldset>
+                  <legend>{{extrNrText}}</legend>
+                  <div class="text">{{offerNr}}</div>
+              </fieldset>
+          </div>
+          <div class="row">
+              <div></div>
+              <fieldset>
+                  <legend>{{extrTimeText}}</legend>
+                  <div class="text">{{drawDate}} {{drawTime}}</div>
+              </fieldset>
+              <fieldset>
+                  <legend>{{winText}}</legend>
+                  <div class="number">{{win}}</div>
+              </fieldset>
+              <fieldset>
+                  <legend>{{payoutText}}</legend>
+                  <div class="number">{{paid}}</div>
+              </fieldset>
+          </div>
+          <div class="row1">
+              <div></div>
+              <fieldset>
+                  <legend>{{playNrText}}</legend>
+                  <div class="spheres">
+                      <div class="sphere bet-button-inner" *ngFor="let number of played[0]; let i = index"
+                      [ngClass]="{
+                        'red':brWin[i] === false,
+                        'green':brWin[i] === true}">{{number}}</div>
+                  </div>
+              </fieldset>
+          </div>
+        <div class="draw-nr">
+            <fieldset>
+                <legend>{{drawNrText}}</legend>
+                <div class="row2">
+                    <div>{{bponude?.Broj01}}</div>
+                    <div>{{bponude?.Broj02}}</div>
+                    <div>{{bponude?.Broj03}}</div>
+                    <div>{{bponude?.Broj04}}</div>
+                    <div>{{bponude?.Broj05}}</div>
+                    <div>{{bponude?.Broj06}}</div>
+                    <div>{{bponude?.Broj07}}</div>
+                    <div>{{bponude?.Broj08}}</div>
+                    <div>{{bponude?.Broj09}}</div>
+                    <div>{{bponude?.Broj10}}</div>
+                    <div>{{bponude?.Broj11}}</div>
+                    <div>{{bponude?.Broj12}}</div>
+                    <div>{{bponude?.Broj13}}</div>
+                    <div>{{bponude?.Broj14}}</div>
+                    <div>{{bponude?.Broj15}}</div>
+                    <div>{{bponude?.Broj16}}</div>
+                    <div>{{bponude?.Broj17}}</div>
+                    <div>{{bponude?.Broj18}}</div>
+                    <div>{{bponude?.Broj19}}</div>
+                    <div>{{bponude?.Broj20}}</div>
+                    <div>{{bponude?.Broj21}}</div>
+                    <div>{{bponude?.Broj22}}</div>
+                    <div>{{bponude?.Broj23}}</div>
+                    <div>{{bponude?.Broj24}}</div>
+                    <div>{{bponude?.Broj25}}</div>
+                    <div>{{bponude?.Broj26}}</div>
+                    <div>{{bponude?.Broj27}}</div>
+                    <div>{{bponude?.Broj28}}</div>
+                    <div>{{bponude?.Broj29}}</div>
+                    <div>{{bponude?.Broj30}}</div>
+                    <div>{{bponude?.Broj31}}</div>
+                    <div>{{bponude?.Broj32}}</div>
+                    <div>{{bponude?.Broj33}}</div>
+                    <div>{{bponude?.Broj34}}</div>
+                    <div>{{bponude?.Broj35}}</div>
+                </div>
+            </fieldset>
+        </div>
+      </div>
+  </div>
+</div>

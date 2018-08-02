@@ -1,60 +1,23 @@
-:host {
+/* :host {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+} */
 /* div {
     border: 1px solid black;
 } */
 #stake-input {
     overflow: hidden;
 }
-.red {
-    background: red;
-    color: white;
-}
-.brd-red {
-    box-shadow: 0 1px 4px 1px rgba(255, 0, 0, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
-}
-.yellow {
-    background: #FFD100;
-    color: black;
-}
-.brd-yellow {
-    box-shadow: 0 1px 4px 1px rgba(255, 208, 0, 0.5), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.6);    
-}
-.blue {
-    background: #00AFFF;
-    color: white;
-}
-.brd-blue {
-    box-shadow: 0 1px 4px 1px rgba(0, 174, 255, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.5);    
-}
-.orange {
-    background: #EA6000;
-    color: white;
-}
-.brd-orange {
-    box-shadow: 0 1px 4px 1px rgba(234, 98, 0, 0.7), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
-}
-.green {
-    background: #00D61D;
-    color: black;
-}
-.brd-green {
-    box-shadow: 0 1px 4px 1px rgba(0, 214, 29, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
-}
-.rose {
-    background: #FF37F6;
-    color: white;
-}
-.brd-rose {
-    box-shadow: 0 1px 4px 1px rgba(255, 55, 245, 0.6), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
-}
-.purple {
-    background: #8C00FF;
-    color: white;
-}
-.brd-purple {
-    box-shadow: 0 1px 4px 1px rgba(140, 0, 255, 0.75), 0 -4px 10px 0px rgba(0, 0, 0, 0.5) inset, 0 4px 10px -1px rgba(7, 42, 88, 0.9) inset, 0 -2px 1px 1px rgba(0,0,0,0.4);    
+
+.bet-button-transparent {
+    position: relative;
+    padding: 0;
+	border-radius: 50%;
+    font-family: Arial Black, Helvetica, sans-serif;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+	text-align: center;
+    text-shadow: 0 2px 1px rgba(0,0,0,0.5);
+    background: rgba(26, 102, 183, 0.5);
+    color: rgba(255, 255, 255, 0.6);
 }
 input[type="radio"], input[type="checkbox"] {
     display: none;
@@ -95,7 +58,7 @@ input[type="radio"], input[type="checkbox"] {
 #stake-buttons input:checked + label,
 #stake-content-ver input:checked + label {
     position: relative;
-    background: linear-gradient(180deg, #00AFFF 0%, rgb(0, 104, 153) 100%);;
+    background: linear-gradient(180deg, #00AFFF 0%, rgb(0, 104, 153) 100%);
     color: white;
     border-radius: 20%;
     /* color: #0c2f55; */
@@ -212,40 +175,7 @@ input[type="button"]:focus,
 input[type="number"]:focus {
     outline: 1px solid rgba(26, 102, 183, 0.5);
 }
-.bet-button-inner {
-    position: relative;
-    padding: 0;
-    box-shadow: 0 -4px 10px 1px rgba(0,0,0,0.5) inset, 0 4px 1px -1px rgba(255,255,255,0.5) inset;
-	border-radius: 50%;
-    font-family: Arial Black, Helvetica, sans-serif;
-	text-align: center;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    border: none;
-    transform: scale(1.05);
-}
-.bet-button-inner:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-radius: 50%;
-    box-shadow: 0px 2px 1px 1px rgba(12, 12, 12, 0.9);
-    background: radial-gradient(circle at 50% 3%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5) 10%,  rgba(255, 255, 255, 0) 20%);
-    filter: blur(3px);
-}
-.bet-button-transparent {
-    position: relative;
-    padding: 0;
-	border-radius: 50%;
-    font-family: Arial Black, Helvetica, sans-serif;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-	text-align: center;
-    text-shadow: 0 2px 1px rgba(0,0,0,0.5);
-    background: rgba(26, 102, 183, 0.5);
-    color: rgba(255, 255, 255, 0.6);
-}
+
 .color-button-inner {
     position: relative;
     border: none;
@@ -350,21 +280,6 @@ input[type="number"]:focus {
 }
 .bold {
     font-weight: bold;
-}
-.spheres {
-    display: grid;
-    grid-auto-flow: column;
-    justify-items: center;
-}
-.sphere {
-    border: 1px solid black;
-    border-radius: 50%;
-    text-align: center;
-    font-size: 125%;
-    margin: 10px auto;
-    line-height: 30px;
-    height: 34px;
-    width: 34px;
 }
 .big {
     font-size: 125%;

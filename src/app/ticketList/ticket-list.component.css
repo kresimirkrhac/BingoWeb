@@ -1,0 +1,31 @@
+.detail {
+    cursor: pointer;
+}
+.row {
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border: 2px outset silver;
+    margin: 5px 0;
+    box-shadow: 0 2px 4px 1px rgba(192,192,192,0.9);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.red {
+    background-image: linear-gradient(rgb(255, 15, 15) 0, rgb(219, 0, 0) 10%, rgb(168, 0, 0) 90%, rgb(143, 0, 0) 100%);
+}
+.green {
+    background-image: linear-gradient(rgb(0, 179, 18) 0, rgb(0, 128, 13) 10%, rgb(0, 77, 8) 90%, rgb(0, 51, 5) 100%);
+}
+.blue {
+    background-image: linear-gradient(rgb(0, 99, 204) 0, rgb(0, 74, 153) 10%, rgb(0, 49, 102) 90%, rgb(0, 37, 77) 100%);
+}
+.brown {
+    background-image: linear-gradient(rgb(204, 56, 56) 0, rgb(187, 48, 48) 10%, rgb(146, 38, 38) 90%, rgb(126, 32, 32) 100%);
+}
+.darkgreen {
+    background-image: linear-gradient(180deg, rgb(0, 153, 0) 0%, rgb(0, 128, 0) 10%, rgb(0, 77, 0) 90%, rgb(0, 51, 0) 100%);
+}
+#head {
+    cursor: default;
+}

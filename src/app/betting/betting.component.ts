@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterContentInit, AfterContentChecked, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { BettingService } from '../services/betting.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { Klinst } from '../models/klinst';
 import { Rparam } from '../models/rparam';
@@ -349,8 +349,9 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
   }
 
   private setOsoba() {
-    if (this.bettingService.getOsobaID().length > 0 ) {
-      this.osobaID = parseInt(this.bettingService.getOsobaID());  
+    let osoba = this.bettingService.getOsobaID()
+    if (osoba != undefined && osoba.length > 0 ) {
+      this.osobaID = parseInt(osoba);  
     }
     else {
       setTimeout(() => {
@@ -360,28 +361,42 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
   }
 
   private setPosl() {
-    if (this.bettingService.getToken().length > 0) {
-      let poslSub: Subscription = this.bettingService.getPosl().subscribe(data => {
-        this.posl = data;
-        if (this.posl != undefined) {
-          this.officeName = this.posl.Poslovnica;
-        }
-        poslSub.unsubscribe();
-      }, (error) => {
-        poslSub.unsubscribe();
-        this.errorText = error;
-        this.openModal('modal-error');
-      });
+    if (this.bettingService.getPosl() != undefined) {
+      this.posl = this.bettingService.getPosl();
     }
     else {
       setTimeout(() => {
         this.setPosl();
-      }, 500);
+      }, 200);
     }
   }
+  // private setPosl() {
+  //   console.log('setPosl()');
+  //   let token = this.bettingService.getToken();
+  //   if (token != undefined && token.length > 0) {
+  //     let poslSub: Subscription = this.bettingService.setPosl().subscribe(data => {
+  //       this.posl = data;
+  //       if (this.posl != undefined) {
+  //         this.officeName = this.posl.Poslovnica;
+  //       }
+  //       poslSub.unsubscribe();
+  //     }, (error) => {
+  //       poslSub.unsubscribe();
+  //       this.errorText = error;
+  //       this.openModal('modal-error');
+  //     });
+  //   }
+  //   else {
+  //     setTimeout(() => {
+  //       this.setPosl();
+  //     }, 500);
+  //   }
+  // }
+
   private setParam() {
     setTimeout(() => {
-      if (this.bettingService.getToken().length > 0 && this.posl != undefined) {
+      let token = this.bettingService.getToken();
+      if (token != undefined && token.length > 0 && this.posl != undefined) {
         let paramSub = this.bettingService.getParam(this.posl.Sifposl).subscribe(data => {
           this.param = data[0];
           paramSub.unsubscribe();
@@ -392,40 +407,42 @@ export class BettingComponent implements OnInit, AfterContentInit, AfterContentC
         });
       }
       else {
-        this.setParam();
+        setTimeout(() => {
+          this.setParam();
+        }, 500);
       }
     }, 50);
   }
 
   private nextDraw() {
-    setTimeout(() => {
-      if (this.bettingService.getToken().length > 0) {
-        let nextDrawSub = this.bettingService.getNextDraw().subscribe(data => {
-          if (data) {
-            this.drawNr = data.ID;
-            this.serDrawTime = data.Vrijeme;
-          }
-          if (data.Sekunde) {
-            this.drawTotSec = data.Sekunde;
-            this.drawTime = Date.now() + this.drawTotSec * 1000;
-            this.setMinSec();
-            this.showTime();
-          }
-          nextDrawSub.unsubscribe();
-        }, error => {
-          nextDrawSub.unsubscribe();
-          this.errorText = error;
-          this.openModal('modal-error');
-        });
-      }
-      else {
+    let token = this.bettingService.getToken();
+    if (token != undefined && token.length > 0) {
+      let nextDrawSub = this.bettingService.getNextDraw().subscribe(data => {
+        if (data) {
+          this.drawNr = data.ID;
+          this.serDrawTime = data.Vrijeme;
+        }
+        if (data.Sekunde) {
+          this.drawTotSec = data.Sekunde;
+          this.drawTime = Date.now() + this.drawTotSec * 1000;
+          this.setMinSec();
+          this.showTime();
+        }
+        nextDrawSub.unsubscribe();
+      }, error => {
+        nextDrawSub.unsubscribe();
+        this.errorText = error;
+        this.openModal('modal-error');
+      });
+    }
+    else {
+      setTimeout(() => {
         this.nextDraw();
-      }
-    }, 50);
+      }, 50);
+    }
   }
 
   private getWeek( d: Date ): number { 
-
     // Create a copy of this date object  
     var target  = new Date(d.valueOf());  
     

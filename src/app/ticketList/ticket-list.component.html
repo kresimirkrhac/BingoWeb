@@ -1,5 +1,33 @@
-<div *ngFor="let ticket of tickets; let i = index">
-    {{i+1}}. {{ticket.Sifposl}}{{ticket.Godina}}{{ticket.Tjedan}}{{ticket.Osoprim}}{{ticket.Brtik}}
+<div id="main-container">
+    <p-paginator [rows]="pageSize" [totalRecords]="count" (onPageChange)="onChangePage($event)"></p-paginator>
+    <div class="row blue" id="head">
+        <div class="text">Broj listića</div>
+        <div class="text">Vrijeme nastanka</div>
+        <div class="number">Ulog</div>
+    </div>
+    <div *ngFor="let item of pageOfItems; let i = index">
+        <div (click)="openDetail(i)" class="row" *ngIf="open[i]" @rowInOut [ngClass]="{
+            'red':item.status[0] === 'G',
+            'green':item.status[0] === 'I',
+            'darkgreen':item.status[0] === 'D',
+            'blue':item.status[0] === 'N',
+            'brown':item.status[0] === 'S'}">
+            <!-- primjer kako dodati style  -->
+            <!-- <div (click)="open = !open" class="row" *ngIf="! open" [ngStyle]="setStyle(i)"> -->
+            <div class="text">{{item.ticketNr}}</div>
+            <div class="text">{{item.bettingDate}} {{item.bettingTime}}</div>
+            <div class="number">{{item.stake}}</div>
+            <div class="stat" *ngIf="item.status == 'G'">&#10006;</div>
+            <div class="stat" *ngIf="item.status == 'I'">&#8364;</div>
+            <div class="stat" *ngIf="item.status == 'D'">&#10004;</div>
+            <div class="stat" *ngIf="item.status == 'N'">&#8987;</div>
+            <div class="stat" *ngIf="item.status == 'S'">S</div>
+        </div>
+        <div *ngIf="detailOpen[i]" class="detail" @detailInOut>
+            <app-ticket-detail [item]="item" (close)="closeDetail(i)"></app-ticket-detail>
+        </div>
+    </div>
+    <!-- <jw-pagination [items]="items" (changePage)="onChangePage($event)">Sam kaj vidim de bi bila paginacija</jw-pagination> -->
 </div>
 <jw-modal id="modal-error" backgroundColor="#922a2a" width="600">
     <p class="align-center">{{errorText}}</p>
@@ -9,5 +37,5 @@
         <button (click)="closeModal('modal-error',$event);">{{closeText}}</button>
         <div></div>
         <div></div>
-      </div>
-  </jw-modal>
+    </div>
+</jw-modal>

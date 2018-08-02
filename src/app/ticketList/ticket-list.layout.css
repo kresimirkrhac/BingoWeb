@@ -1,0 +1,9 @@
+#main-container {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+}
+.row {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1.5fr 0.2fr
+}

@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { catchError, tap } from 'rxjs/operators';
-// import 'rxjs/add/operator/map';
-import { of } from 'rxjs/observable/of'; 
+import { Observable ,  of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators'; 
 import { Klinst } from '../models/klinst';
 import { Rparam } from '../models/rparam';
 import { Bticket } from '../models/bticket';
 import { tick } from '@angular/core/testing';
+import { Bponude } from '../models/bponude';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,33 +15,19 @@ import { tick } from '@angular/core/testing';
 
 @Injectable()
 export class BettingService {
-  // private prodUrl: string = "http://ds9a.clab.hr:8443/nodeapi";
-  //prodUrl: string = "http://192.168.1.101:8443/nodeapi";
-  // private prodUrl: string = "https://clabck.dyndns.org:8443/nodeapi";
   // private prodUrl: string = "http://clabck.dyndns.org:8443/nodeapi";
-  private prodUrl: string = "http://192.168.1.56:8443/nodeapi";
+  private prodUrl: string = "https://clabapp.com:8443/nodeapi";
 
-  // token: string = "";
   username: string = "Pero";
   encryptedPassword: string = "A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=";
+  Guid='e0b9a40a-1900-11e7-93ae-92361f002671';
+  // token: string = "";
   // poslID: number = 0;
   // osobaID: number = 0;
 
   constructor(private http: HttpClient) { }
 
-  // async getToken(): Promise<any> {
-  //   return new Promise<any>((resolve, reject) => {
-  //     this.http.post<any>(this.prodUrl + '/token', {Username: this.username, Password: this.encryptedPassword}, httpOptions)
-  //       .toPromise()
-  //       .then(
-  //         (res => { return resolve(res); }),
-  //         (err => { return reject(err); })
-  //       );
-  //   });
-  // }
-
   login() {
-    // try {
       return this.http.post<any>(this.prodUrl + '/token', { Username: this.username, Password: this.encryptedPassword }).pipe(
         tap(user => {
           // login successful if there's a jwt token in the response
@@ -61,21 +46,24 @@ export class BettingService {
         }),
         catchError(this.handleError<any>('Login'))
       );
-    // }
-    // catch (err) {
-    //   console.log(err);
-    // }
   }
 
   logout() {
     // remove user from local storage to log user out
+    sessionStorage.removeItem('osoba');
+    sessionStorage.removeItem('posl');
     sessionStorage.removeItem('token');
     // localStorage.removeItem('token');
     // this.token = "";
   }
 
   getPoslID() {
-    return sessionStorage.getItem('posl');
+    let ret = undefined;
+    let posl = JSON.parse(sessionStorage.getItem('posl'));
+    if (posl != undefined) {
+      ret = posl['Sifposl'];
+    }
+    return ret;
   }
 
   getOsobaID() {
@@ -89,10 +77,10 @@ export class BettingService {
   }
 
   setPosl(): Observable<Klinst> {
-    return this.http.get<Klinst>(this.prodUrl + '/klinst?Guid=e0b9a40a-1900-11e7-93ae-92361f002671').pipe(
+    return this.http.get<Klinst>(this.prodUrl + `/klinst?Guid=${this.Guid}`).pipe(
       tap(data => {
         if (data) {
-          sessionStorage.setItem('poslAll',JSON.stringify(data));
+          sessionStorage.setItem('posl',JSON.stringify(data));
           return data;
         }
       }),
@@ -100,17 +88,8 @@ export class BettingService {
     );
   }
 
-  getPosl(): Observable<Klinst> {
-    return this.http.get<Klinst>(this.prodUrl + '/klinst?Guid=e0b9a40a-1900-11e7-93ae-92361f002671').pipe(
-      tap(data => {
-        if (data) {
-          // this.poslID = data.Sifposl;
-          sessionStorage.setItem('posl',data.Sifposl.toString());
-          return data;
-        }
-      }),
-      catchError( this.handleError<Klinst>('getPosl') )
-    );
+  getPosl() {
+    return JSON.parse(sessionStorage.getItem('posl'));
   }
 
   getParam(posl: number): Observable<Rparam> {
@@ -164,37 +143,69 @@ export class BettingService {
     return this.http.get<any>(this.prodUrl + `/bticket/osocount?Sifposl=${posl}&Osoprim=${osoba}`).pipe(
       tap(data => {
         if (data) {
-          var date = new Date();          console.log(`stigli podaci ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} ${JSON.stringify(data)}`);
+          // var date = new Date();          console.log(`stigli podaci ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} ${JSON.stringify(data)}`);
           return data;
         }
       }),
       catchError( this.handleError<any>('getTicketCount') )
     );
   }
-  getTickets(ind: number): Observable<Bticket[]> {
-    let ticket: Bticket[] = [];
-    let odigrano: number[][];
-    odigrano = [];
-    odigrano.push([1,2,3,4,5,6]);
-    odigrano.push([7,8,9,10,11,12,13,14]);
 
-    ticket.push({ Sifposl: 999, Godina: 18, Tjedan: 28, Osoprim: 123, Brtik: 121, 
-      Datprim: new Date(), Osoispl: 0, Datispl: new Date(), Osostrn: 0,
-      Datstrn: new Date(), Ulog: 1.9, Mtros: 0.1, Uplata: 2.0, 
-      Evdobsp: 12.0, Evporez: 0.0, Evdobbezp: 12.0, Isplaceno: 0.0,
-      Datpromj: new Date(), Osopromj: 123, Indik: 'N', Pin: 1234,
-      Brpon: 123122, Datodig: new Date(), Krugova: 1,
-      Odigrano: odigrano, Jack1: 0 }
+  getTickets(index: number, bundle: number): Observable<Bticket[]> {
+    let posl = this.getPoslID();
+    let osoba = this.getOsobaID();
+    return this.http.get<any>(this.prodUrl + `/bticket/osolist?Sifposl=${posl}&Osoprim=${osoba}&From=${index}&Count=${bundle}`).pipe(
+      tap(data => {
+        if (data) {
+          // var date = new Date();          console.log(`stigli podaci ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} ${JSON.stringify(data)}`);
+          return data;
+        }
+      }),
+      catchError( this.handleError<any>('getTickets') )
     );
-    ticket.push({ Sifposl: 999, Godina: 18, Tjedan: 28, Osoprim: 123, Brtik: 122, 
-      Datprim: new Date(), Osoispl: 0, Datispl: new Date(), Osostrn: 0,
-      Datstrn: new Date(), Ulog: 2.8, Mtros: 0.2, Uplata: 3.0, 
-      Evdobsp: 14.0, Evporez: 0.0, Evdobbezp: 14.0, Isplaceno: 0.0,
-      Datpromj: new Date(), Osopromj: 123, Indik: 'N', Pin: 1234,
-      Brpon: 123122, Datodig: new Date(), Krugova: 1,
-      Odigrano: odigrano, Jack1: 0 }
+    // let ticket: Bticket[] = [];
+    // let odigrano: number[][];
+    // odigrano = [];
+    // odigrano.push([1,2,3,4,5,6]);
+    // odigrano.push([7,8,9,10,11,12,13,14]);
+
+    // ticket.push({ Sifposl: 999, Godina: 18, Tjedan: 28, Osoprim: 123, Brtik: 121, 
+    //   Datprim: new Date(), Osoispl: 0, Datispl: new Date(), Osostrn: 0,
+    //   Datstrn: new Date(), Ulog: 1.9, Mtros: 0.1, Uplata: 2.0, 
+    //   Evdobsp: 12.0, Evporez: 0.0, Evdobbezp: 12.0, Isplaceno: 0.0,
+    //   Datpromj: new Date(), Osopromj: 123, Indik: 'N', Pin: 1234,
+    //   Brpon: 123122, Datodig: new Date(), Krugova: 1,
+    //   Odigrano: odigrano, Jack1: 0 }
+    // );
+    // ticket.push({ Sifposl: 999, Godina: 18, Tjedan: 28, Osoprim: 123, Brtik: 122, 
+    //   Datprim: new Date(), Osoispl: 0, Datispl: new Date(), Osostrn: 0,
+    //   Datstrn: new Date(), Ulog: 2.8, Mtros: 0.2, Uplata: 3.0, 
+    //   Evdobsp: 14.0, Evporez: 0.0, Evdobbezp: 14.0, Isplaceno: 0.0,
+    //   Datpromj: new Date(), Osopromj: 123, Indik: 'N', Pin: 1234,
+    //   Brpon: 123122, Datodig: new Date(), Krugova: 1,
+    //   Odigrano: odigrano, Jack1: 0 }
+    // );
+    // return of(ticket);
+  }
+
+  getDrawnNumbers(ticketNr: string, pin: number) {
+    let data: string;  
+    data = ticketNr.substr(0,3);    let posl  = +data;
+    data = ticketNr.substr(3,2);    let god   = +data;
+    data = ticketNr.substr(5,2);    let tjed  = +data;
+    data = ticketNr.substr(7,3);    let osoba = +data;
+    data = ticketNr.substr(10,5);   let broj = +data;
+    // console.log(this.prodUrl + `/bponude?Sifposl=${posl}&Godina=${god}&Tjedan=${tjed}&Osoprim=${osoba}&Brtik=${broj}&Pin=${pin}`);
+    
+    return this.http.get<Bponude>(this.prodUrl + `/bponude?Sifposl=${posl}&Godina=${god}&Tjedan=${tjed}&Osoprim=${osoba}&Brtik=${broj}&Pin=${pin}`).pipe(
+      tap(data => {
+        if (data) {
+          // var date = new Date();          console.log(`stigli podaci ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} ${JSON.stringify(data)}`);
+          return data;
+        }
+      }),
+      catchError( this.handleError<any>('getDrawnNumbers') )
     );
-    return of(ticket);
   }
 
   /**
@@ -242,3 +253,14 @@ export class BettingService {
     return JSON.parse(decoded);
   }
 }
+
+// async getToken(): Promise<any> {
+//   return new Promise<any>((resolve, reject) => {
+//     this.http.post<any>(this.prodUrl + '/token', {Username: this.username, Password: this.encryptedPassword}, httpOptions)
+//       .toPromise()
+//       .then(
+//         (res => { return resolve(res); }),
+//         (err => { return reject(err); })
+//       );
+//   });
+// }

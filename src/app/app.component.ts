@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from '../../node_modules/rxjs/Subscription';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { BettingService } from './services/betting.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { BettingService } from './services/betting.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private bettingService: BettingService) {}
   ngOnInit() {
@@ -16,11 +16,19 @@ export class AppComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    this.bettingService.logout();
+  }
+
   private tryLogin() {
-    if (this.bettingService.getToken().length < 1) {
+    let token = this.bettingService.getToken();
+    if (token != undefined && token.length < 1) {
       setTimeout(() => {
         if (this.login() == false) {
           this.tryLogin();
+        }
+        else {
+          this.setPosl();
         }
       }, 5000);
     }
@@ -30,6 +38,7 @@ export class AppComponent implements OnInit {
     let ret: boolean;
     let loginSub: Subscription = this.bettingService.login().subscribe(() => {
       loginSub.unsubscribe();
+      this.setPosl();
       ret = true;
     }, error => {
       loginSub.unsubscribe();
@@ -39,7 +48,8 @@ export class AppComponent implements OnInit {
   }
 
   private setPosl() {
-    if (this.bettingService.getToken().length > 0) {
+    let token = this.bettingService.getToken();
+    if (token != undefined && token.length > 0) {
       let poslSub: Subscription = this.bettingService.setPosl().subscribe(data => {
         poslSub.unsubscribe();
       }, (error) => {
